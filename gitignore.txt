@@ -1,0 +1,66 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Virtual environments
+venv/
+fern_env/
+fern_build_env/
+.venv/
+env/
+
+# Training outputs — large binary files, not tracked
+models/*.pth
+models/*.pt
+logs/
+
+# Dataset — raw videos and extracted skeletons are NOT committed
+data/raw/
+data/skeletons/
+data/labels/
+data/processed/
+data/merged_v1/
+data/v1_clips/
+
+# MediaPipe model cache
+.cache/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# Offline packages — too large for git
+offline_packages/
+
+# ffmpeg binaries
+ffmpeg*/
+
+# Compressed archives
+*.zip
+*.tar.gz
+*.7z
+
+# Keep these empty dirs in git
+!data/raw/.gitkeep
+!data/skeletons/.gitkeep
+!data/labels/.gitkeep
+!models/.gitkeep
+!logs/.gitkeep

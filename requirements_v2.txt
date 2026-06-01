@@ -1,0 +1,32 @@
+
+# FERN v2 requirements
+# Install with:
+#   pip install --no-index --find-links C:\fern\offline_packages -r requirements_v2.txt
+# (offline) or:
+#   pip install -r requirements_v2.txt
+# (online)
+
+# Core deep learning
+torch==2.2.2
+torchvision==0.17.2
+torchaudio==2.2.2
+
+# Skeleton extraction
+mediapipe==0.10.14
+
+# Data handling
+numpy==1.26.4
+pandas==2.2.2
+scipy==1.13.0
+
+# Video
+opencv-python==4.9.0.80
+
+# Training utilities
+tensorboard==2.16.2
+tqdm==4.66.2
+pyyaml==6.0.1
+
+# Testing
+pytest==8.1.1
+pytest-cov==5.0.0
