@@ -99,7 +99,7 @@ Download: `https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_
 
 ```powershell
 # Clone and set up
-git clone https://github.com/YOUR_USERNAME/FERN_v2.git
+git clone https://github.com/Vision-Orchestration/FERN
 cd FERN_v2
 python -m venv venv
 .\venv\Scripts\Activate.ps1
@@ -115,6 +115,13 @@ python src\infer_v2.py --model models\fern_v2_best.pth --camera_id "path\to\vide
 ---
 
 ## Training pipeline
+
+
+## Interactive Roadmap
+
+🌐 View the live roadmap:
+
+https://Vision-Orchestration.github.io/FERN/
 
 ### 1. Label videos
 
@@ -215,6 +222,8 @@ Outputs merged long videos + auto-generated label JSONs.
 - [ ] Paper submission (IEEE Sensors Journal / MDPI Sensors)
 - [ ] GitHub open-source with weights and demo
 - [ ] Dataset release (skeleton CSVs)
+
+
 
 ---
 
