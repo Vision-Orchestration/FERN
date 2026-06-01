@@ -1,0 +1,238 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:transparent}
+.road{padding:1rem 0;font-family:var(--font-sans)}
+.phase-strip{display:flex;gap:6px;margin-bottom:1.5rem;overflow-x:auto;padding-bottom:2px}
+.phase-pill{padding:5px 14px;border-radius:20px;font-size:12px;font-weight:500;white-space:nowrap;border:0.5px solid transparent;cursor:default}
+.phase-pill.done{background:#EAF3DE;color:#3B6D11;border-color:#C0DD97}
+.phase-pill.active{background:#E6F1FB;color:#185FA5;border-color:#85B7EB}
+.phase-pill.next{background:var(--color-background-secondary);color:var(--color-text-secondary);border-color:var(--color-border-tertiary)}
+.dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px;vertical-align:middle}
+.dot.done{background:#639922}.dot.active{background:#378ADD}.dot.next{background:var(--color-text-tertiary,#9ca3af)}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.col{border-radius:var(--border-radius-lg);border:0.5px solid var(--color-border-tertiary);overflow:hidden}
+.col-head{padding:10px 14px 8px;border-bottom:0.5px solid var(--color-border-tertiary)}
+.col-head .label{font-size:11px;font-weight:500;letter-spacing:.5px;text-transform:uppercase;margin-bottom:2px}
+.col-head .title{font-size:14px;font-weight:500;color:var(--color-text-primary)}
+.col-head .sub{font-size:11px;color:var(--color-text-secondary);margin-top:1px}
+.col-body{padding:8px 10px;display:flex;flex-direction:column;gap:5px}
+.task{border-radius:6px;padding:6px 9px;border:0.5px solid transparent;font-size:12px;line-height:1.45}
+.task .tname{font-weight:500;color:var(--color-text-primary);display:flex;align-items:flex-start;gap:5px}
+.task .tname i{font-size:13px;flex-shrink:0;margin-top:1px}
+.task .tdesc{color:var(--color-text-secondary);font-size:11px;margin-top:2px;padding-left:18px}
+
+/* phase colors */
+.alpha .col-head{background:#E6F1FB20}.alpha .label{color:#378ADD}
+.alpha .task{background:#E6F1FB30;border-color:#B5D4F420}
+.alpha .task i{color:#378ADD}
+
+.beta .col-head{background:#EEEDFE20}.beta .label{color:#7F77DD}
+.beta .task{background:#EEEDFE30;border-color:#AFA9EC20}
+.beta .task i{color:#7F77DD}
+
+.gold .col-head{background:#FAEEDA20}.gold .label{color:#BA7517}
+.gold .task{background:#FAEEDA30;border-color:#FAC77520}
+.gold .task i{color:#BA7517}
+
+.release .col-head{background:#FAECE720}.release .label{color:#D85A30}
+.release .task{background:#FAECE730;border-color:#F5C4B320}
+.release .task i{color:#D85A30}
+
+.post .col-head{background:var(--color-background-secondary)}.post .label{color:var(--color-text-tertiary,#9ca3af)}
+.post .task{background:var(--color-background-secondary);border-color:var(--color-border-tertiary)}
+.post .task i{color:var(--color-text-tertiary,#9ca3af)}
+
+.divider{margin:1rem 0 .75rem;display:flex;align-items:center;gap:8px;font-size:11px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.5px}
+.divider::after{content:'';flex:1;height:0.5px;background:var(--color-border-tertiary)}
+
+.aug-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.aug-card{border-radius:var(--border-radius-lg);border:0.5px solid var(--color-border-tertiary);padding:10px 12px}
+.aug-card .act{font-size:12px;font-weight:500;color:var(--color-text-primary);margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.aug-card .act i{font-size:14px;color:#639922}
+.aug-card .step{font-size:11px;color:var(--color-text-secondary);display:flex;align-items:flex-start;gap:5px;margin-bottom:3px}
+.aug-card .step::before{content:'→';flex-shrink:0;color:var(--color-text-tertiary,#9ca3af)}
+</style>
+
+<div class="road">
+<div class="phase-strip">
+  <div class="phase-pill done"><span class="dot done"></span>Early programming ✓</div>
+  <div class="phase-pill active"><span class="dot active"></span>Alpha — now</div>
+  <div class="phase-pill next"><span class="dot next"></span>Beta</div>
+  <div class="phase-pill next"><span class="dot next"></span>Gold</div>
+  <div class="phase-pill next"><span class="dot next"></span>Release</div>
+  <div class="phase-pill next"><span class="dot next"></span>Post-release</div>
+</div>
+
+<div class="cols">
+
+<div class="col alpha">
+  <div class="col-head">
+    <div class="label">Alpha</div>
+    <div class="title">Fix & expand</div>
+    <div class="sub">Current phase</div>
+  </div>
+  <div class="col-body">
+    <div class="task">
+      <div class="tname"><i class="ti ti-tag"></i>Labeling tool — S/E single-pass</div>
+      <div class="tdesc">S=start, E=end, W=save. A/D±5f, B/F±50f. Bold overlay.</div>
+    </div>
+    <div class="task">
+      <div class="tname"><i class="ti ti-flip-horizontal"></i>LR mirror new database</div>
+      <div class="tdesc">Negate X, swap joint pairs. ~20 labeled vids → ×2 dataset.</div>
+    </div>
+    <div class="task">
+      <div class="tname"><i class="ti ti-movie"></i>Merge FERN v1 clips</div>
+      <div class="tdesc">ffmpeg concat + auto-label JSON from 5s clips by gesture folder.</div>
+    </div>
+    <div class="task">
+      <div class="tname"><i class="ti ti-walk"></i>Idle class</div>
+      <div class="tdesc">Record stand-still videos. Add as class 0. Retrain.</div>
+    </div>
+    <div class="task">
+      <div class="tname"><i class="ti ti-clock-shift"></i>Window offset fix</div>
+      <div class="tdesc">Shift window ~15f earlier to catch gesture onset, not midpoint.</div>
+    </div>
+    <div class="task">
+      <div class="tname"><i class="ti ti-users"></i>Subject-independent eval</div>
+      <div class="tdesc">Leave-one-subject-out split. True generalisation accuracy.</div>
+    </div>
+    <div class="task">
+      <div class="tname"><i class="ti ti-cpu"></i>CUDA utilisation probe</div>
+      <div class="tdesc">Check DataLoader workers, batch size, mixed precision.</div>
+    </div>
+  </div>
+</div>
+
+<div class="col beta">
+  <div class="col-head">
+    <div class="label">Beta</div>
+    <div class="title">Multi-camera + streaming</div>
+    <div class="sub">After Alpha milestones done</div>
+  </div>
+  <div class="col-body">
+    <div class="task">
+      <div class="tname"><i class="ti ti-camera-plus"></i>45° camera — Option B</div>
+      <div class="tdesc">Feature-level fusion: concat front+angle → 60-feature input. Fixes heel_tap.</div>
+    </div>
+    <div class="task">
+      <div class="tname"><i class="ti ti-cube-3d-sphere"></i>3D reconstruction — Option C</div>
+      <div class="tdesc">Stereo triangulation. Paper ablation row. Checkerboard calibration session.</div>
+    </div>
+    <div class="task">
+      <div class="tname"><i class="ti ti-clock-2"></i>Frame sync buffer</div>
+      <div class="tdesc">Hold frames until both cameras deliver same timestamp.</div>
+    </div>
+    <div class="task">
+      <div class="tname"><i class="ti ti-device-mobile"></i>DroidGrid integration</div>
+      <div class="tdesc">Phone → MJPEG socket → MediaPipe pipeline. Overlay streamed back.</div>
+    </div>
+    <div class="task">
+      <div class="tname"><i class="ti ti-wave-sine"></i>Confidence smoothing</div>
+      <div class="tdesc">Temporal N-frame majority vote. Stops label flicker in live inference.</div>
+    </div>
+  </div>
+</div>
+
+<div class="col gold">
+  <div class="col-head">
+    <div class="label">Gold</div>
+    <div class="title">Paper-ready</div>
+    <div class="sub">Freeze → write</div>
+  </div>
+  <div class="col-body">
+    <div class="task">
+      <div class="tname"><i class="ti ti-chart-scatter"></i>Augmentation expansion</div>
+      <div class="tdesc">Mirror + rotation ±5° + brightness. Applied last, after all real data collected.</div>
+    </div>
+    <div class="task">
+      <div class="tname"><i class="ti ti-table"></i>Ablation study</div>
+      <div class="tdesc">Single-cam vs Option B vs Option C. Three rows in results table.</div>
+    </div>
+    <div class="task">
+      <div class="tname"><i class="ti ti-lock"></i>Dataset freeze</div>
+      <div class="tdesc">No new data after this point. All eval numbers reproducible.</div>
+    </div>
+    <div class="task">
+      <div class="tname"><i class="ti ti-file-description"></i>Paper sections</div>
+      <div class="tdesc">Methodology, results, related work, conclusion. Architecture diagrams.</div>
+    </div>
+    <div class="task">
+      <div class="tname"><i class="ti ti-package"></i>Deployment package</div>
+      <div class="tdesc">Self-contained ZIP. install.ps1. Tested on 3 machines including CPU-only.</div>
+    </div>
+  </div>
+</div>
+
+<div class="col release">
+  <div class="col-head">
+    <div class="label">Release</div>
+    <div class="title">Publish & open</div>
+    <div class="sub">~18 weeks from now</div>
+  </div>
+  <div class="col-body">
+    <div class="task">
+      <div class="tname"><i class="ti ti-file-upload"></i>Paper submitted</div>
+      <div class="tdesc">IEEE Sensors Journal (primary) or MDPI Sensors. ISMAR as backup.</div>
+    </div>
+    <div class="task">
+      <div class="tname"><i class="ti ti-brand-github"></i>GitHub open-source</div>
+      <div class="tdesc">Full source + weights + README + demo video.</div>
+    </div>
+    <div class="task">
+      <div class="tname"><i class="ti ti-database"></i>Dataset public</div>
+      <div class="tdesc">Skeleton CSVs released. Raw videos optional (consent required).</div>
+    </div>
+  </div>
+</div>
+
+<div class="col post">
+  <div class="col-head">
+    <div class="label">Post-release</div>
+    <div class="title">Future paths</div>
+    <div class="sub">Choose one or more</div>
+  </div>
+  <div class="col-body">
+    <div class="task">
+      <div class="tname"><i class="ti ti-building-factory-2"></i>Industrial deployment</div>
+      <div class="tdesc">Factory floor ergonomics. Edge device (Jetson). ISO compliance.</div>
+    </div>
+    <div class="task">
+      <div class="tname"><i class="ti ti-360-view"></i>VR/AR locomotion</div>
+      <div class="tdesc">Foot gestures as controller input. ISMAR / IEEE VR target.</div>
+    </div>
+    <div class="task">
+      <div class="tname"><i class="ti ti-heart-rate-monitor"></i>Physiotherapy</div>
+      <div class="tdesc">Rehab exercise counting and form correction. Clinical partnership.</div>
+    </div>
+    <div class="task">
+      <div class="tname"><i class="ti ti-brain"></i>Unsupervised segmentation</div>
+      <div class="tdesc">Auto-segment unlabeled videos. PhD-level research direction.</div>
+    </div>
+    <div class="task">
+      <div class="tname"><i class="ti ti-users-group"></i>Multi-person</div>
+      <div class="tdesc">Track multiple subjects simultaneously. Crowd analysis use case.</div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<div class="divider">Database expansion — Alpha priority</div>
+<div class="aug-row">
+  <div class="aug-card">
+    <div class="act"><i class="ti ti-flip-horizontal"></i>Step 1 — LR mirror (run now)</div>
+    <div class="step">Reads skeleton CSVs + label JSONs from new DB (~20 vids)</div>
+    <div class="step">Negates X, swaps BlazePose left/right joint pairs</div>
+    <div class="step">Writes <code>*_mirror.csv</code> + <code>*_mirror.json</code></div>
+    <div class="step">Result: ~20 → ~40 labeled subjects, zero re-recording</div>
+  </div>
+  <div class="aug-card">
+    <div class="act"><i class="ti ti-movie"></i>Step 2 — v1 merge (run after)</div>
+    <div class="step">Reads v1 clips from <code>v1_data/&lt;gesture&gt;/</code> folders</div>
+    <div class="step">Groups by (subject, angle) from filename pattern</div>
+    <div class="step">ffmpeg concat with 5-frame gap between clips</div>
+    <div class="step">Auto-generates label JSON with accurate frame offsets</div>
+  </div>
+</div>
+</div>
