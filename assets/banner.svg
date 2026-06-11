@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 200" width="900" height="200">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#0d1117"/>
+      <stop offset="100%" style="stop-color:#161b22"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#58a6ff"/>
+      <stop offset="100%" style="stop-color:#3fb950"/>
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="900" height="200" fill="url(#bg)" rx="12"/>
+  <!-- Skeleton dots - decorative pose joints -->
+  <!-- Head -->
+  <circle cx="760" cy="42" r="6" fill="#58a6ff" opacity="0.6"/>
+  <!-- Neck -->
+  <circle cx="760" cy="62" r="4" fill="#58a6ff" opacity="0.5"/>
+  <!-- Shoulders -->
+  <circle cx="730" cy="78" r="4" fill="#58a6ff" opacity="0.5"/>
+  <circle cx="790" cy="78" r="4" fill="#58a6ff" opacity="0.5"/>
+  <!-- Hips -->
+  <circle cx="740" cy="120" r="4" fill="#3fb950" opacity="0.6"/>
+  <circle cx="780" cy="120" r="4" fill="#3fb950" opacity="0.6"/>
+  <!-- Mid-hip -->
+  <circle cx="760" cy="112" r="3" fill="#58a6ff" opacity="0.4"/>
+  <!-- Knees -->
+  <circle cx="735" cy="155" r="4" fill="#3fb950" opacity="0.5"/>
+  <circle cx="785" cy="148" r="4" fill="#3fb950" opacity="0.5"/>
+  <!-- Ankles -->
+  <circle cx="730" cy="185" r="5" fill="#f78166" opacity="0.8"/>
+  <circle cx="800" cy="173" r="5" fill="#f78166" opacity="0.8"/>
+  <!-- Skeleton lines -->
+  <line x1="760" y1="62" x2="730" y2="78" stroke="#58a6ff" stroke-width="1.5" opacity="0.3"/>
+  <line x1="760" y1="62" x2="790" y2="78" stroke="#58a6ff" stroke-width="1.5" opacity="0.3"/>
+  <line x1="760" y1="112" x2="740" y2="120" stroke="#3fb950" stroke-width="1.5" opacity="0.3"/>
+  <line x1="760" y1="112" x2="780" y2="120" stroke="#3fb950" stroke-width="1.5" opacity="0.3"/>
+  <line x1="740" y1="120" x2="735" y2="155" stroke="#3fb950" stroke-width="1.5" opacity="0.3"/>
+  <line x1="780" y1="120" x2="785" y2="148" stroke="#3fb950" stroke-width="1.5" opacity="0.3"/>
+  <line x1="735" y1="155" x2="730" y2="185" stroke="#f78166" stroke-width="2" opacity="0.5"/>
+  <line x1="785" y1="148" x2="800" y2="173" stroke="#f78166" stroke-width="2" opacity="0.5"/>
+  <line x1="760" y1="42" x2="760" y2="62" stroke="#58a6ff" stroke-width="1.5" opacity="0.3"/>
+  <line x1="760" y1="62" x2="760" y2="112" stroke="#58a6ff" stroke-width="1.5" opacity="0.3"/>
+  <!-- Left elbow / wrist suggestions -->
+  <circle cx="708" cy="105" r="3" fill="#58a6ff" opacity="0.4"/>
+  <circle cx="694" cy="130" r="3" fill="#58a6ff" opacity="0.35"/>
+  <line x1="730" y1="78" x2="708" y2="105" stroke="#58a6ff" stroke-width="1.2" opacity="0.25"/>
+  <line x1="708" y1="105" x2="694" y2="130" stroke="#58a6ff" stroke-width="1.2" opacity="0.2"/>
+  <!-- Grid dots subtle -->
+  <g opacity="0.06">
+    <circle cx="820" cy="30" r="1.5" fill="white"/>
+    <circle cx="845" cy="30" r="1.5" fill="white"/>
+    <circle cx="870" cy="30" r="1.5" fill="white"/>
+    <circle cx="820" cy="55" r="1.5" fill="white"/>
+    <circle cx="845" cy="55" r="1.5" fill="white"/>
+    <circle cx="870" cy="55" r="1.5" fill="white"/>
+    <circle cx="820" cy="80" r="1.5" fill="white"/>
+    <circle cx="845" cy="80" r="1.5" fill="white"/>
+    <circle cx="870" cy="80" r="1.5" fill="white"/>
+  </g>
+  <!-- Accent top bar -->
+  <rect x="60" y="0" width="120" height="3" fill="url(#accent)" rx="2"/>
+  <!-- Tag -->
+  <rect x="60" y="28" width="85" height="22" rx="11" fill="#21262d"/>
+  <text x="102" y="43" font-family="ui-monospace,SFMono-Regular,monospace" font-size="11" fill="#3fb950" text-anchor="middle">v2 · Alpha</text>
+  <!-- Title -->
+  <text x="60" y="100" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="62" font-weight="800" fill="white" letter-spacing="-2">FERN</text>
+  <!-- Subtitle -->
+  <text x="60" y="128" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="16" font-weight="400" fill="#8b949e">Foot gEsture Recognition Network</text>
+  <!-- Divider -->
+  <line x1="60" y1="145" x2="620" y2="145" stroke="#30363d" stroke-width="1"/>
+  <!-- Stats row -->
+  <text x="60" y="170" font-family="ui-monospace,SFMono-Regular,monospace" font-size="12" fill="#58a6ff">93.67%</text>
+  <text x="60" y="186" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="10" fill="#484f58">Top-1 Accuracy</text>
+  <text x="170" y="170" font-family="ui-monospace,SFMono-Regular,monospace" font-size="12" fill="#58a6ff">98.73%</text>
+  <text x="170" y="186" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="10" fill="#484f58">Top-3 Accuracy</text>
+  <text x="280" y="170" font-family="ui-monospace,SFMono-Regular,monospace" font-size="12" fill="#3fb950">100%</text>
+  <text x="280" y="186" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="10" fill="#484f58">Detection Rate</text>
+  <text x="380" y="170" font-family="ui-monospace,SFMono-Regular,monospace" font-size="12" fill="#3fb950">823K</text>
+  <text x="380" y="186" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="10" fill="#484f58">Parameters</text>
+  <text x="465" y="170" font-family="ui-monospace,SFMono-Regular,monospace" font-size="12" fill="#d29922">35</text>
+  <text x="465" y="186" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="10" fill="#484f58">Subjects</text>
+  <text x="530" y="170" font-family="ui-monospace,SFMono-Regular,monospace" font-size="12" fill="#d29922">7</text>
+  <text x="530" y="186" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="10" fill="#484f58">Gesture Classes</text>
+</svg>
