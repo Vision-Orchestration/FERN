@@ -1,0 +1,51 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Logs
+logs/
+logs_*/
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Offline packages
+offline_packages/
+
+# ffmpeg binaries
+ffmpeg*/
+
+# Archives
+*.zip
+*.tar.gz
+*.7z
+
+# MediaPipe model cache
+.cache/
+
+# YOLO weights
+*.pt
