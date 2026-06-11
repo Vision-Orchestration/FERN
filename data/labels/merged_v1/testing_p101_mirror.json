@@ -1,0 +1,246 @@
+{
+  "video_path": "C:\\fern\\FERN_V2\\data\\merged_v1\\testing_p101.mp4",
+  "fps": 29.97002997002997,
+  "total_frames": 8730,
+  "gesture_order": [
+    "unknown"
+  ],
+  "reps_per_gesture": null,
+  "source": "fern_v1_merged",
+  "segments": [
+    {
+      "gesture": "unknown",
+      "start_frame": 3,
+      "end_frame": 236
+    },
+    {
+      "gesture": "unknown",
+      "start_frame": 243,
+      "end_frame": 476
+    },
+    {
+      "gesture": "unknown",
+      "start_frame": 483,
+      "end_frame": 746
+    },
+    {
+      "gesture": "unknown",
+      "start_frame": 753,
+      "end_frame": 1001
+    },
+    {
+      "gesture": "unknown",
+      "start_frame": 1008,
+      "end_frame": 1241
+    },
+    {
+      "gesture": "unknown",
+      "start_frame": 1248,
+      "end_frame": 1301
+    },
+    {
+      "gesture": "unknown",
+      "start_frame": 1308,
+      "end_frame": 1496
+    },
+    {
+      "gesture": "unknown",
+      "start_frame": 1503,
+      "end_frame": 1676
+    },
+    {
+      "gesture": "unknown",
+      "start_frame": 1683,
+      "end_frame": 2021
+    },
+    {
+      "gesture": "unknown",
+      "start_frame": 2028,
+      "end_frame": 2201
+    },
+    {
+      "gesture": "unknown",
+      "start_frame": 2208,
+      "end_frame": 2366
+    },
+    {
+      "gesture": "unknown",
+      "start_frame": 2373,
+      "end_frame": 2501
+    },
+    {
+      "gesture": "unknown",
+      "start_frame": 2508,
+      "end_frame": 2681
+    },
+    {
+      "gesture": "unknown",
+      "start_frame": 2688,
+      "end_frame": 2861
+    },
+    {
+      "gesture": "unknown",
+      "start_frame": 2868,
+      "end_frame": 3101
+    },
+    {
+      "gesture": "unknown",
+      "start_frame": 3108,
+      "end_frame": 3281
+    },
+    {
+      "gesture": "unknown",
+      "start_frame": 3288,
+      "end_frame": 3461
+    },
+    {
+      "gesture": "unknown",
+      "start_frame": 3468,
+      "end_frame": 3626
+    },
+    {
+      "gesture": "unknown",
+      "start_frame": 3633,
+      "end_frame": 3776
+    },
+    {
+      "gesture": "unknown",
+      "start_frame": 3783,
+      "end_frame": 3926
+    },
+    {
+      "gesture": "unknown",
+      "start_frame": 3933,
+      "end_frame": 4106
+    },
+    {
+      "gesture": "unknown",
+      "start_frame": 4113,
+      "end_frame": 4271
+    },
+    {
+      "gesture": "unknown",
+      "start_frame": 4278,
+      "end_frame": 4436
+    },
+    {
+      "gesture": "unknown",
+      "start_frame": 4443,
+      "end_frame": 4601
+    },
+    {
+      "gesture": "unknown",
+      "start_frame": 4608,
+      "end_frame": 4721
+    },
+    {
+      "gesture": "unknown",
+      "start_frame": 4728,
+      "end_frame": 4871
+    },
+    {
+      "gesture": "unknown",
+      "start_frame": 4878,
+      "end_frame": 5021
+    },
+    {
+      "gesture": "unknown",
+      "start_frame": 5028,
+      "end_frame": 5186
+    },
+    {
+      "gesture": "unknown",
+      "start_frame": 5193,
+      "end_frame": 5411
+    },
+    {
+      "gesture": "unknown",
+      "start_frame": 5418,
+      "end_frame": 5621
+    },
+    {
+      "gesture": "unknown",
+      "start_frame": 5628,
+      "end_frame": 5801
+    },
+    {
+      "gesture": "unknown",
+      "start_frame": 5808,
+      "end_frame": 6011
+    },
+    {
+      "gesture": "unknown",
+      "start_frame": 6018,
+      "end_frame": 6206
+    },
+    {
+      "gesture": "unknown",
+      "start_frame": 6213,
+      "end_frame": 6446
+    },
+    {
+      "gesture": "unknown",
+      "start_frame": 6453,
+      "end_frame": 6641
+    },
+    {
+      "gesture": "unknown",
+      "start_frame": 6648,
+      "end_frame": 6821
+    },
+    {
+      "gesture": "unknown",
+      "start_frame": 6828,
+      "end_frame": 6986
+    },
+    {
+      "gesture": "unknown",
+      "start_frame": 6993,
+      "end_frame": 7196
+    },
+    {
+      "gesture": "unknown",
+      "start_frame": 7203,
+      "end_frame": 7421
+    },
+    {
+      "gesture": "unknown",
+      "start_frame": 7428,
+      "end_frame": 7616
+    },
+    {
+      "gesture": "unknown",
+      "start_frame": 7623,
+      "end_frame": 7796
+    },
+    {
+      "gesture": "unknown",
+      "start_frame": 7797,
+      "end_frame": 7991
+    },
+    {
+      "gesture": "unknown",
+      "start_frame": 7992,
+      "end_frame": 8201
+    },
+    {
+      "gesture": "unknown",
+      "start_frame": 8208,
+      "end_frame": 8351
+    },
+    {
+      "gesture": "unknown",
+      "start_frame": 8358,
+      "end_frame": 8546
+    },
+    {
+      "gesture": "unknown",
+      "start_frame": 8553,
+      "end_frame": 8726
+    }
+  ],
+  "refined_by": "refine_labels.py",
+  "refinement_search": 5,
+  "refinement_threshold_pct": 70,
+  "mirror_of": "testing_p101"
+}

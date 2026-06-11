@@ -1,0 +1,1286 @@
+{
+  "video_path": "lateral_slide_mirror",
+  "fps": 30.0,
+  "total_frames": 41793,
+  "gesture_order": [
+    "sideway_kick"
+  ],
+  "reps_per_gesture": null,
+  "source": "fern_v1_grouped_by_gesture",
+  "segments": [
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 3,
+      "end_frame": 74
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 81,
+      "end_frame": 167
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 174,
+      "end_frame": 330
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 337,
+      "end_frame": 498
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 505,
+      "end_frame": 675
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 682,
+      "end_frame": 834
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 841,
+      "end_frame": 925
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 932,
+      "end_frame": 1034
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 1037,
+      "end_frame": 1198
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 1202,
+      "end_frame": 1362
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 1364,
+      "end_frame": 1540
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 1542,
+      "end_frame": 1696
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 1697,
+      "end_frame": 1744
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 1742,
+      "end_frame": 1796
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 1798,
+      "end_frame": 1965
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 1962,
+      "end_frame": 2128
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 2130,
+      "end_frame": 2306
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 2308,
+      "end_frame": 2465
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 2472,
+      "end_frame": 2519
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 2526,
+      "end_frame": 2585
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 2592,
+      "end_frame": 2749
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 2756,
+      "end_frame": 2917
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 2924,
+      "end_frame": 3095
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 3102,
+      "end_frame": 3254
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 3261,
+      "end_frame": 3380
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 3387,
+      "end_frame": 3516
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 3523,
+      "end_frame": 3581
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 3588,
+      "end_frame": 3646
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 3644,
+      "end_frame": 3775
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 3782,
+      "end_frame": 3947
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 3954,
+      "end_frame": 4068
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 4075,
+      "end_frame": 4193
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 4200,
+      "end_frame": 4328
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 4335,
+      "end_frame": 4402
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 4409,
+      "end_frame": 4474
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 4481,
+      "end_frame": 4609
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 4616,
+      "end_frame": 4778
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 4785,
+      "end_frame": 4896
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 4898,
+      "end_frame": 5022
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 5024,
+      "end_frame": 5158
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 5160,
+      "end_frame": 5200
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 5197,
+      "end_frame": 5231
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 5233,
+      "end_frame": 5368
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 5370,
+      "end_frame": 5489
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 5492,
+      "end_frame": 5614
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 5616,
+      "end_frame": 5751
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 5758,
+      "end_frame": 5796
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 5803,
+      "end_frame": 5839
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 5846,
+      "end_frame": 5979
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 5978,
+      "end_frame": 6148
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 6155,
+      "end_frame": 6267
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 6274,
+      "end_frame": 6393
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 6400,
+      "end_frame": 6530
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 6537,
+      "end_frame": 6597
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 6604,
+      "end_frame": 6661
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 6668,
+      "end_frame": 6798
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 6805,
+      "end_frame": 6970
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 6977,
+      "end_frame": 7090
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 7097,
+      "end_frame": 7150
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 7152,
+      "end_frame": 7303
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 7310,
+      "end_frame": 7470
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 7477,
+      "end_frame": 7544
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 7551,
+      "end_frame": 7735
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 7742,
+      "end_frame": 7895
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 7900,
+      "end_frame": 7961
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 7968,
+      "end_frame": 8113
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 8120,
+      "end_frame": 8279
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 8286,
+      "end_frame": 8362
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 8369,
+      "end_frame": 8550
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 8557,
+      "end_frame": 8706
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 8713,
+      "end_frame": 8740
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 8742,
+      "end_frame": 8893
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 8895,
+      "end_frame": 9060
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 9064,
+      "end_frame": 9102
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 9104,
+      "end_frame": 9293
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 9295,
+      "end_frame": 9451
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 9458,
+      "end_frame": 9492
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 9495,
+      "end_frame": 9645
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 9652,
+      "end_frame": 9812
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 9819,
+      "end_frame": 9861
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 9868,
+      "end_frame": 10052
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 10059,
+      "end_frame": 10211
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 10218,
+      "end_frame": 10332
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 10339,
+      "end_frame": 10447
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 10454,
+      "end_frame": 10599
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 10606,
+      "end_frame": 10788
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 10795,
+      "end_frame": 11013
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 11020,
+      "end_frame": 11282
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 11289,
+      "end_frame": 11463
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 11470,
+      "end_frame": 11681
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 11688,
+      "end_frame": 11823
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 11830,
+      "end_frame": 11958
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 11965,
+      "end_frame": 12110
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 12117,
+      "end_frame": 12298
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 12305,
+      "end_frame": 12520
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 12527,
+      "end_frame": 12786
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 12793,
+      "end_frame": 12965
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 12967,
+      "end_frame": 13182
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 13184,
+      "end_frame": 13259
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 13266,
+      "end_frame": 13332
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 13334,
+      "end_frame": 13485
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 13487,
+      "end_frame": 13676
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 13678,
+      "end_frame": 13901
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 13908,
+      "end_frame": 14172
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 14175,
+      "end_frame": 14353
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 14360,
+      "end_frame": 14572
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 14579,
+      "end_frame": 14656
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 14663,
+      "end_frame": 14737
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 14744,
+      "end_frame": 14892
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 14899,
+      "end_frame": 15083
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 15090,
+      "end_frame": 15309
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 15312,
+      "end_frame": 15578
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 15585,
+      "end_frame": 15759
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 15766,
+      "end_frame": 15982
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 15981,
+      "end_frame": 16048
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 16046,
+      "end_frame": 16097
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 16099,
+      "end_frame": 16198
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 16205,
+      "end_frame": 16266
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 16268,
+      "end_frame": 16410
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 16417,
+      "end_frame": 16545
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 16552,
+      "end_frame": 16710
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 16716,
+      "end_frame": 16837
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 16834,
+      "end_frame": 16908
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 16910,
+      "end_frame": 16970
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 16977,
+      "end_frame": 17088
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 17095,
+      "end_frame": 17167
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 17174,
+      "end_frame": 17310
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 17317,
+      "end_frame": 17447
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 17446,
+      "end_frame": 17607
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 17609,
+      "end_frame": 17729
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 17736,
+      "end_frame": 17766
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 17768,
+      "end_frame": 17796
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 17803,
+      "end_frame": 17853
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 17860,
+      "end_frame": 17891
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 17893,
+      "end_frame": 18035
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 18042,
+      "end_frame": 18172
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 18178,
+      "end_frame": 18337
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 18344,
+      "end_frame": 18460
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 18467,
+      "end_frame": 18506
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 18509,
+      "end_frame": 18543
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 18550,
+      "end_frame": 18615
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 18618,
+      "end_frame": 18663
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 18670,
+      "end_frame": 18808
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 18815,
+      "end_frame": 18944
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 18951,
+      "end_frame": 19109
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 19116,
+      "end_frame": 19233
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 19235,
+      "end_frame": 19299
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 19301,
+      "end_frame": 19352
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 19354,
+      "end_frame": 19454
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 19456,
+      "end_frame": 19523
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 19529,
+      "end_frame": 19666
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 19668,
+      "end_frame": 19802
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 19804,
+      "end_frame": 19966
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 19968,
+      "end_frame": 20090
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 20097,
+      "end_frame": 20169
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 20171,
+      "end_frame": 20246
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 20244,
+      "end_frame": 20397
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 20404,
+      "end_frame": 20555
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 20562,
+      "end_frame": 20705
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 20704,
+      "end_frame": 20856
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 20858,
+      "end_frame": 20978
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 20985,
+      "end_frame": 21062
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 21069,
+      "end_frame": 21216
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 21223,
+      "end_frame": 21372
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 21379,
+      "end_frame": 21518
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 21525,
+      "end_frame": 21670
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 21677,
+      "end_frame": 21732
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 21739,
+      "end_frame": 21774
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 21781,
+      "end_frame": 21930
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 21937,
+      "end_frame": 22089
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 22096,
+      "end_frame": 22237
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 22244,
+      "end_frame": 22391
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 22398,
+      "end_frame": 22465
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 22472,
+      "end_frame": 22516
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 22523,
+      "end_frame": 22672
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 22679,
+      "end_frame": 22831
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 22838,
+      "end_frame": 22979
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 22986,
+      "end_frame": 23133
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 23140,
+      "end_frame": 23299
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 23306,
+      "end_frame": 23458
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 23465,
+      "end_frame": 23622
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 23624,
+      "end_frame": 23781
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 23788,
+      "end_frame": 23944
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 23951,
+      "end_frame": 24102
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 24109,
+      "end_frame": 24264
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 24271,
+      "end_frame": 24422
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 24429,
+      "end_frame": 24588
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 24595,
+      "end_frame": 24748
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 24755,
+      "end_frame": 24914
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 24919,
+      "end_frame": 25072
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 25074,
+      "end_frame": 25237
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 25239,
+      "end_frame": 25397
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 25404,
+      "end_frame": 25560
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 25567,
+      "end_frame": 25721
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 25723,
+      "end_frame": 25822
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 25829,
+      "end_frame": 25930
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 25937,
+      "end_frame": 26156
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 26158,
+      "end_frame": 26371
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 26373,
+      "end_frame": 26644
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 26650,
+      "end_frame": 26826
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 26833,
+      "end_frame": 26941
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 26946,
+      "end_frame": 27059
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 27066,
+      "end_frame": 27282
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 27289,
+      "end_frame": 27495
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 27502,
+      "end_frame": 27765
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 27772,
+      "end_frame": 27946
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 27953,
+      "end_frame": 28004
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 28009,
+      "end_frame": 28068
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 28075,
+      "end_frame": 28294
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 28301,
+      "end_frame": 28511
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 28518,
+      "end_frame": 28785
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 28792,
+      "end_frame": 28968
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 28970,
+      "end_frame": 29036
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 29043,
+      "end_frame": 29113
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 29110,
+      "end_frame": 29334
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 29341,
+      "end_frame": 29551
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 29558,
+      "end_frame": 29829
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 29827,
+      "end_frame": 30008
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 30014,
+      "end_frame": 30099
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 30106,
+      "end_frame": 30174
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 30181,
+      "end_frame": 30281
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 30288,
+      "end_frame": 30369
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 30376,
+      "end_frame": 30422
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 30429,
+      "end_frame": 30466
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 30473,
+      "end_frame": 30530
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 30537,
+      "end_frame": 30582
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 30589,
+      "end_frame": 30673
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 30680,
+      "end_frame": 30748
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 30755,
+      "end_frame": 30896
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 30903,
+      "end_frame": 31072
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 31079,
+      "end_frame": 31230
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 31237,
+      "end_frame": 31393
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 31400,
+      "end_frame": 31583
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 31590,
+      "end_frame": 31690
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 31693,
+      "end_frame": 31778
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 31785,
+      "end_frame": 31925
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 31927,
+      "end_frame": 32100
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 32107,
+      "end_frame": 32257
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 32259,
+      "end_frame": 32418
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 32420,
+      "end_frame": 32606
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 32607,
+      "end_frame": 32658
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 32662,
+      "end_frame": 32702
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 32709,
+      "end_frame": 32855
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 32853,
+      "end_frame": 33028
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 33035,
+      "end_frame": 33187
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 33194,
+      "end_frame": 33350
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 33352,
+      "end_frame": 33540
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 33542,
+      "end_frame": 33604
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 33611,
+      "end_frame": 33656
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 33663,
+      "end_frame": 33805
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 33812,
+      "end_frame": 33983
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 33990,
+      "end_frame": 34141
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 34148,
+      "end_frame": 34305
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 34312,
+      "end_frame": 34495
+    }
+  ],
+  "mirrored": true,
+  "refined_by": "refine_labels.py",
+  "refinement_search": 5,
+  "refinement_threshold_pct": 70
+}

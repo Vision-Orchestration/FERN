@@ -1,0 +1,122 @@
+{
+  "video_path": "data\\raw\\data 23.mp4",
+  "fps": 29.580799948811595,
+  "total_frames": 1315,
+  "gesture_order": [
+    "foot_lift",
+    "sideway_kick",
+    "cross_front",
+    "heel_tap",
+    "flamingo_bend",
+    "forward_step",
+    "forward_kick"
+  ],
+  "reps_per_gesture": 3,
+  "segments": [
+    {
+      "gesture": "foot_lift",
+      "start_frame": 10,
+      "end_frame": 54
+    },
+    {
+      "gesture": "foot_lift",
+      "start_frame": 55,
+      "end_frame": 104
+    },
+    {
+      "gesture": "foot_lift",
+      "start_frame": 105,
+      "end_frame": 159
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 160,
+      "end_frame": 214
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 215,
+      "end_frame": 264
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 265,
+      "end_frame": 319
+    },
+    {
+      "gesture": "cross_front",
+      "start_frame": 320,
+      "end_frame": 399
+    },
+    {
+      "gesture": "cross_front",
+      "start_frame": 400,
+      "end_frame": 479
+    },
+    {
+      "gesture": "cross_front",
+      "start_frame": 480,
+      "end_frame": 554
+    },
+    {
+      "gesture": "heel_tap",
+      "start_frame": 555,
+      "end_frame": 604
+    },
+    {
+      "gesture": "heel_tap",
+      "start_frame": 605,
+      "end_frame": 649
+    },
+    {
+      "gesture": "heel_tap",
+      "start_frame": 650,
+      "end_frame": 734
+    },
+    {
+      "gesture": "flamingo_bend",
+      "start_frame": 735,
+      "end_frame": 794
+    },
+    {
+      "gesture": "flamingo_bend",
+      "start_frame": 795,
+      "end_frame": 859
+    },
+    {
+      "gesture": "flamingo_bend",
+      "start_frame": 860,
+      "end_frame": 934
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 935,
+      "end_frame": 999
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 1000,
+      "end_frame": 1064
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 1065,
+      "end_frame": 1144
+    },
+    {
+      "gesture": "forward_kick",
+      "start_frame": 1145,
+      "end_frame": 1204
+    },
+    {
+      "gesture": "forward_kick",
+      "start_frame": 1205,
+      "end_frame": 1259
+    },
+    {
+      "gesture": "forward_kick",
+      "start_frame": 1260,
+      "end_frame": 1314
+    }
+  ]
+}

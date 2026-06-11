@@ -1,0 +1,154 @@
+{
+  "video_path": "data\\raw\\data 30.mp4",
+  "fps": 29.918015589102314,
+  "total_frames": 1521,
+  "gesture_order": [
+    "foot_lift",
+    "sideway_kick",
+    "cross_front",
+    "heel_tap",
+    "flamingo_bend",
+    "forward_step",
+    "forward_kick"
+  ],
+  "reps_per_gesture": 3,
+  "segments": [
+    {
+      "gesture": "foot_lift",
+      "start_frame": 0,
+      "end_frame": 19
+    },
+    {
+      "gesture": "foot_lift",
+      "start_frame": 20,
+      "end_frame": 64
+    },
+    {
+      "gesture": "foot_lift",
+      "start_frame": 65,
+      "end_frame": 84
+    },
+    {
+      "gesture": "foot_hold",
+      "start_frame": 85,
+      "end_frame": 144
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 145,
+      "end_frame": 189
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 190,
+      "end_frame": 234
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 235,
+      "end_frame": 279
+    },
+    {
+      "gesture": "foot_hold",
+      "start_frame": 280,
+      "end_frame": 339
+    },
+    {
+      "gesture": "cross_front",
+      "start_frame": 340,
+      "end_frame": 424
+    },
+    {
+      "gesture": "cross_front",
+      "start_frame": 425,
+      "end_frame": 514
+    },
+    {
+      "gesture": "cross_front",
+      "start_frame": 515,
+      "end_frame": 564
+    },
+    {
+      "gesture": "foot_hold",
+      "start_frame": 565,
+      "end_frame": 624
+    },
+    {
+      "gesture": "heel_tap",
+      "start_frame": 625,
+      "end_frame": 659
+    },
+    {
+      "gesture": "heel_tap",
+      "start_frame": 660,
+      "end_frame": 704
+    },
+    {
+      "gesture": "heel_tap",
+      "start_frame": 705,
+      "end_frame": 729
+    },
+    {
+      "gesture": "foot_hold",
+      "start_frame": 730,
+      "end_frame": 789
+    },
+    {
+      "gesture": "flamingo_bend",
+      "start_frame": 790,
+      "end_frame": 854
+    },
+    {
+      "gesture": "flamingo_bend",
+      "start_frame": 855,
+      "end_frame": 899
+    },
+    {
+      "gesture": "flamingo_bend",
+      "start_frame": 900,
+      "end_frame": 979
+    },
+    {
+      "gesture": "foot_hold",
+      "start_frame": 980,
+      "end_frame": 1039
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 1040,
+      "end_frame": 1129
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 1130,
+      "end_frame": 1209
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 1210,
+      "end_frame": 1244
+    },
+    {
+      "gesture": "foot_hold",
+      "start_frame": 1245,
+      "end_frame": 1304
+    },
+    {
+      "gesture": "forward_kick",
+      "start_frame": 1305,
+      "end_frame": 1359
+    },
+    {
+      "gesture": "forward_kick",
+      "start_frame": 1360,
+      "end_frame": 1434
+    },
+    {
+      "gesture": "forward_kick",
+      "start_frame": 1435,
+      "end_frame": 1520
+    }
+  ],
+  "foot_hold_gaps_added_by": "add_foot_hold_gaps.py",
+  "camera_id": 0
+}

@@ -1,0 +1,267 @@
+{
+  "video_path": "C:\\fern\\FERN_V2\\data\\merged_v1\\p09_c2.mp4",
+  "fps": 29.348,
+  "total_frames": 8415,
+  "gesture_order": [
+    "heel_tap",
+    "forward_kick",
+    "foot_lift",
+    "sideway_kick",
+    "forward_step",
+    "cross_front",
+    "foot_hold",
+    "flamingo_bend"
+  ],
+  "reps_per_gesture": null,
+  "source": "fern_v1_merged",
+  "segments": [
+    {
+      "gesture": "heel_tap",
+      "start_frame": 3,
+      "end_frame": 147
+    },
+    {
+      "gesture": "heel_tap",
+      "start_frame": 153,
+      "end_frame": 303
+    },
+    {
+      "gesture": "heel_tap",
+      "start_frame": 310,
+      "end_frame": 459
+    },
+    {
+      "gesture": "heel_tap",
+      "start_frame": 466,
+      "end_frame": 618
+    },
+    {
+      "gesture": "heel_tap",
+      "start_frame": 625,
+      "end_frame": 707
+    },
+    {
+      "gesture": "heel_tap",
+      "start_frame": 714,
+      "end_frame": 796
+    },
+    {
+      "gesture": "forward_kick",
+      "start_frame": 797,
+      "end_frame": 886
+    },
+    {
+      "gesture": "forward_kick",
+      "start_frame": 893,
+      "end_frame": 988
+    },
+    {
+      "gesture": "forward_kick",
+      "start_frame": 989,
+      "end_frame": 1149
+    },
+    {
+      "gesture": "forward_kick",
+      "start_frame": 1150,
+      "end_frame": 1316
+    },
+    {
+      "gesture": "forward_kick",
+      "start_frame": 1323,
+      "end_frame": 1497
+    },
+    {
+      "gesture": "forward_kick",
+      "start_frame": 1504,
+      "end_frame": 1664
+    },
+    {
+      "gesture": "foot_lift",
+      "start_frame": 1671,
+      "end_frame": 1809
+    },
+    {
+      "gesture": "foot_lift",
+      "start_frame": 1816,
+      "end_frame": 1989
+    },
+    {
+      "gesture": "foot_lift",
+      "start_frame": 1996,
+      "end_frame": 2148
+    },
+    {
+      "gesture": "foot_lift",
+      "start_frame": 2155,
+      "end_frame": 2310
+    },
+    {
+      "gesture": "foot_lift",
+      "start_frame": 2317,
+      "end_frame": 2399
+    },
+    {
+      "gesture": "foot_lift",
+      "start_frame": 2406,
+      "end_frame": 2486
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 2493,
+      "end_frame": 2599
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 2606,
+      "end_frame": 2720
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 2726,
+      "end_frame": 2942
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 2946,
+      "end_frame": 3155
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 3162,
+      "end_frame": 3425
+    },
+    {
+      "gesture": "sideway_kick",
+      "start_frame": 3426,
+      "end_frame": 3606
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 3613,
+      "end_frame": 3801
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 3806,
+      "end_frame": 4007
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 4014,
+      "end_frame": 4230
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 4231,
+      "end_frame": 4433
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 4434,
+      "end_frame": 4591
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 4598,
+      "end_frame": 4697
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 4698,
+      "end_frame": 4793
+    },
+    {
+      "gesture": "cross_front",
+      "start_frame": 4800,
+      "end_frame": 4888
+    },
+    {
+      "gesture": "cross_front",
+      "start_frame": 4895,
+      "end_frame": 4984
+    },
+    {
+      "gesture": "cross_front",
+      "start_frame": 4991,
+      "end_frame": 5145
+    },
+    {
+      "gesture": "cross_front",
+      "start_frame": 5146,
+      "end_frame": 5313
+    },
+    {
+      "gesture": "cross_front",
+      "start_frame": 5314,
+      "end_frame": 5483
+    },
+    {
+      "gesture": "cross_front",
+      "start_frame": 5485,
+      "end_frame": 5646
+    },
+    {
+      "gesture": "foot_hold",
+      "start_frame": 5661,
+      "end_frame": 5817
+    },
+    {
+      "gesture": "foot_hold",
+      "start_frame": 5862,
+      "end_frame": 6018
+    },
+    {
+      "gesture": "foot_hold",
+      "start_frame": 6044,
+      "end_frame": 6173
+    },
+    {
+      "gesture": "foot_hold",
+      "start_frame": 6200,
+      "end_frame": 6266
+    },
+    {
+      "gesture": "foot_hold",
+      "start_frame": 6283,
+      "end_frame": 6357
+    },
+    {
+      "gesture": "flamingo_bend",
+      "start_frame": 6364,
+      "end_frame": 6447
+    },
+    {
+      "gesture": "flamingo_bend",
+      "start_frame": 6448,
+      "end_frame": 6526
+    },
+    {
+      "gesture": "flamingo_bend",
+      "start_frame": 6533,
+      "end_frame": 6674
+    },
+    {
+      "gesture": "flamingo_bend",
+      "start_frame": 6681,
+      "end_frame": 6831
+    },
+    {
+      "gesture": "flamingo_bend",
+      "start_frame": 6838,
+      "end_frame": 6987
+    },
+    {
+      "gesture": "flamingo_bend",
+      "start_frame": 6994,
+      "end_frame": 7148
+    },
+    {
+      "gesture": "flamingo_bend",
+      "start_frame": 7155,
+      "end_frame": 7281
+    }
+  ],
+  "refined_by": "refine_labels.py",
+  "refinement_search": 5,
+  "refinement_threshold_pct": 70
+}

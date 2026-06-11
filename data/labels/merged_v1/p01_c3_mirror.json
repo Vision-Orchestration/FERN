@@ -1,0 +1,27 @@
+{
+  "video_path": "C:\\fern\\FERN_V2\\data\\merged_v1\\p01_c3.mp4",
+  "fps": 9.928,
+  "total_frames": 93,
+  "gesture_order": [
+    "foot_hold",
+    "flamingo_bend"
+  ],
+  "reps_per_gesture": null,
+  "source": "fern_v1_merged",
+  "segments": [
+    {
+      "gesture": "foot_hold",
+      "start_frame": 23,
+      "end_frame": 42
+    },
+    {
+      "gesture": "flamingo_bend",
+      "start_frame": 49,
+      "end_frame": 89
+    }
+  ],
+  "refined_by": "refine_labels.py",
+  "refinement_search": 5,
+  "refinement_threshold_pct": 70,
+  "mirror_of": "p01_c3"
+}

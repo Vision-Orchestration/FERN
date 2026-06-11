@@ -1,0 +1,1146 @@
+{
+  "video_path": "C:\\fern\\FERN_V2\\data\\grouped_by_gesture\\forward_step.mp4",
+  "fps": 30.0,
+  "total_frames": 39193,
+  "gesture_order": [
+    "forward_step"
+  ],
+  "reps_per_gesture": null,
+  "source": "fern_v1_grouped_by_gesture",
+  "segments": [
+    {
+      "gesture": "forward_step",
+      "start_frame": 3,
+      "end_frame": 180
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 187,
+      "end_frame": 380
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 387,
+      "end_frame": 573
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 580,
+      "end_frame": 748
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 755,
+      "end_frame": 855
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 862,
+      "end_frame": 938
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 945,
+      "end_frame": 1120
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 1127,
+      "end_frame": 1320
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 1326,
+      "end_frame": 1510
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 1512,
+      "end_frame": 1688
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 1686,
+      "end_frame": 1812
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 1818,
+      "end_frame": 1908
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 1910,
+      "end_frame": 2093
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 2100,
+      "end_frame": 2294
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 2301,
+      "end_frame": 2487
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 2494,
+      "end_frame": 2662
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 2669,
+      "end_frame": 2722
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 2729,
+      "end_frame": 2769
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 2776,
+      "end_frame": 2953
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 2960,
+      "end_frame": 3154
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 3157,
+      "end_frame": 3348
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 3355,
+      "end_frame": 3523
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 3530,
+      "end_frame": 3598
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 3605,
+      "end_frame": 3656
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 3663,
+      "end_frame": 3806
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 3813,
+      "end_frame": 3968
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 3973,
+      "end_frame": 4103
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 4110,
+      "end_frame": 4177
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 4184,
+      "end_frame": 4263
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 4270,
+      "end_frame": 4412
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 4419,
+      "end_frame": 4568
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 4575,
+      "end_frame": 4704
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 4711,
+      "end_frame": 4864
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 4871,
+      "end_frame": 4951
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 4958,
+      "end_frame": 5055
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 5053,
+      "end_frame": 5202
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 5204,
+      "end_frame": 5361
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 5363,
+      "end_frame": 5499
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 5501,
+      "end_frame": 5660
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 5665,
+      "end_frame": 5703
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 5705,
+      "end_frame": 5753
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 5755,
+      "end_frame": 5903
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 5905,
+      "end_frame": 6061
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 6068,
+      "end_frame": 6198
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 6205,
+      "end_frame": 6359
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 6366,
+      "end_frame": 6412
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 6419,
+      "end_frame": 6472
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 6479,
+      "end_frame": 6622
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 6629,
+      "end_frame": 6780
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 6787,
+      "end_frame": 6918
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 6920,
+      "end_frame": 6996
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 7003,
+      "end_frame": 7085
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 7092,
+      "end_frame": 7216
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 7223,
+      "end_frame": 7385
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 7392,
+      "end_frame": 7552
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 7554,
+      "end_frame": 7636
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 7638,
+      "end_frame": 7723
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 7730,
+      "end_frame": 7853
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 7860,
+      "end_frame": 8025
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 8023,
+      "end_frame": 8186
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 8193,
+      "end_frame": 8284
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 8291,
+      "end_frame": 8385
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 8392,
+      "end_frame": 8521
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 8528,
+      "end_frame": 8693
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 8695,
+      "end_frame": 8860
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 8862,
+      "end_frame": 8909
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 8913,
+      "end_frame": 8957
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 8959,
+      "end_frame": 9088
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 9090,
+      "end_frame": 9259
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 9261,
+      "end_frame": 9426
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 9433,
+      "end_frame": 9484
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 9491,
+      "end_frame": 9544
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 9546,
+      "end_frame": 9647
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 9654,
+      "end_frame": 9740
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 9742,
+      "end_frame": 9952
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 9954,
+      "end_frame": 10175
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 10182,
+      "end_frame": 10401
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 10408,
+      "end_frame": 10584
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 10591,
+      "end_frame": 10795
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 10802,
+      "end_frame": 10915
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 10922,
+      "end_frame": 11023
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 11030,
+      "end_frame": 11233
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 11240,
+      "end_frame": 11455
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 11462,
+      "end_frame": 11679
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 11686,
+      "end_frame": 11861
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 11868,
+      "end_frame": 12071
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 12076,
+      "end_frame": 12129
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 12136,
+      "end_frame": 12183
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 12190,
+      "end_frame": 12395
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 12397,
+      "end_frame": 12623
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 12622,
+      "end_frame": 12847
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 12849,
+      "end_frame": 13034
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 13039,
+      "end_frame": 13243
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 13250,
+      "end_frame": 13317
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 13322,
+      "end_frame": 13385
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 13382,
+      "end_frame": 13594
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 13601,
+      "end_frame": 13822
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 13820,
+      "end_frame": 14048
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 14053,
+      "end_frame": 14231
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 14238,
+      "end_frame": 14443
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 14450,
+      "end_frame": 14582
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 14584,
+      "end_frame": 14735
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 14738,
+      "end_frame": 14892
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 14899,
+      "end_frame": 15057
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 15064,
+      "end_frame": 15136
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 15143,
+      "end_frame": 15222
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 15224,
+      "end_frame": 15360
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 15367,
+      "end_frame": 15511
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 15518,
+      "end_frame": 15673
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 15670,
+      "end_frame": 15833
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 15840,
+      "end_frame": 15925
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 15927,
+      "end_frame": 16026
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 16033,
+      "end_frame": 16165
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 16169,
+      "end_frame": 16318
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 16325,
+      "end_frame": 16477
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 16484,
+      "end_frame": 16645
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 16652,
+      "end_frame": 16692
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 16699,
+      "end_frame": 16744
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 16751,
+      "end_frame": 16883
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 16890,
+      "end_frame": 17035
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 17042,
+      "end_frame": 17194
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 17201,
+      "end_frame": 17362
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 17369,
+      "end_frame": 17418
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 17425,
+      "end_frame": 17479
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 17486,
+      "end_frame": 17618
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 17625,
+      "end_frame": 17772
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 17777,
+      "end_frame": 17928
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 17935,
+      "end_frame": 18096
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 18103,
+      "end_frame": 18175
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 18182,
+      "end_frame": 18261
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 18268,
+      "end_frame": 18428
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 18435,
+      "end_frame": 18599
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 18606,
+      "end_frame": 18770
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 18777,
+      "end_frame": 18851
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 18858,
+      "end_frame": 18942
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 18949,
+      "end_frame": 19107
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 19111,
+      "end_frame": 19277
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 19284,
+      "end_frame": 19447
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 19449,
+      "end_frame": 19542
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 19549,
+      "end_frame": 19649
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 19656,
+      "end_frame": 19817
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 19824,
+      "end_frame": 19990
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 19992,
+      "end_frame": 20162
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 20167,
+      "end_frame": 20213
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 20220,
+      "end_frame": 20271
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 20278,
+      "end_frame": 20438
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 20445,
+      "end_frame": 20609
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 20611,
+      "end_frame": 20780
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 20782,
+      "end_frame": 20837
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 20842,
+      "end_frame": 20913
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 20916,
+      "end_frame": 21091
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 21098,
+      "end_frame": 21263
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 21270,
+      "end_frame": 21435
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 21442,
+      "end_frame": 21599
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 21606,
+      "end_frame": 21780
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 21779,
+      "end_frame": 21947
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 21949,
+      "end_frame": 22117
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 22119,
+      "end_frame": 22279
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 22285,
+      "end_frame": 22458
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 22465,
+      "end_frame": 22630
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 22632,
+      "end_frame": 22802
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 22809,
+      "end_frame": 22966
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 22968,
+      "end_frame": 23145
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 23147,
+      "end_frame": 23316
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 23318,
+      "end_frame": 23489
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 23491,
+      "end_frame": 23652
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 23659,
+      "end_frame": 23848
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 23855,
+      "end_frame": 24055
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 24062,
+      "end_frame": 24280
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 24287,
+      "end_frame": 24482
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 24489,
+      "end_frame": 24643
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 24650,
+      "end_frame": 24733
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 24740,
+      "end_frame": 24816
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 24823,
+      "end_frame": 25011
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 25018,
+      "end_frame": 25217
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 25224,
+      "end_frame": 25440
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 25442,
+      "end_frame": 25641
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 25647,
+      "end_frame": 25801
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 25808,
+      "end_frame": 25907
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 25914,
+      "end_frame": 26004
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 26007,
+      "end_frame": 26201
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 26202,
+      "end_frame": 26408
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 26412,
+      "end_frame": 26634
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 26641,
+      "end_frame": 26837
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 26840,
+      "end_frame": 26999
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 27006,
+      "end_frame": 27056
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 27063,
+      "end_frame": 27105
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 27107,
+      "end_frame": 27306
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 27304,
+      "end_frame": 27509
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 27516,
+      "end_frame": 27734
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 27741,
+      "end_frame": 27936
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 27943,
+      "end_frame": 28098
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 28105,
+      "end_frame": 28161
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 28168,
+      "end_frame": 28219
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 28226,
+      "end_frame": 28321
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 28328,
+      "end_frame": 28424
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 28431,
+      "end_frame": 28543
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 28550,
+      "end_frame": 28664
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 28671,
+      "end_frame": 28723
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 28730,
+      "end_frame": 28783
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 28790,
+      "end_frame": 28854
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 28856,
+      "end_frame": 28926
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 28928,
+      "end_frame": 29028
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 29035,
+      "end_frame": 29135
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 29133,
+      "end_frame": 29304
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 29309,
+      "end_frame": 29458
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 29460,
+      "end_frame": 29638
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 29640,
+      "end_frame": 29837
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 29839,
+      "end_frame": 29956
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 29963,
+      "end_frame": 30077
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 30084,
+      "end_frame": 30248
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 30251,
+      "end_frame": 30402
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 30409,
+      "end_frame": 30582
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 30589,
+      "end_frame": 30781
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 30788,
+      "end_frame": 30840
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 30847,
+      "end_frame": 30900
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 30907,
+      "end_frame": 31072
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 31079,
+      "end_frame": 31228
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 31235,
+      "end_frame": 31411
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 31418,
+      "end_frame": 31611
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 31618,
+      "end_frame": 31682
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 31684,
+      "end_frame": 31754
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 31761,
+      "end_frame": 31926
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 31933,
+      "end_frame": 32083
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 32090,
+      "end_frame": 32265
+    },
+    {
+      "gesture": "forward_step",
+      "start_frame": 32272,
+      "end_frame": 32466
+    }
+  ],
+  "refined_by": "refine_labels.py",
+  "refinement_search": 5,
+  "refinement_threshold_pct": 70,
+  "foot_hold_gaps_added_by": "add_foot_hold_gaps.py"
+}
