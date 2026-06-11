@@ -49,3 +49,15 @@ ffmpeg*/
 
 # YOLO weights
 *.pt
+
+# Repomix output (full repo dump, too large for git)
+repomix-output.xml
+
+# Stale experiment directories
+models/
+models_exp*/
+models_front*/
+models_front_plus_45/
+
+# Stale root-level skeleton CSVs from old recording sessions
+data/skeletons/*.csv
