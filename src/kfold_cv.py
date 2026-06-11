@@ -95,6 +95,7 @@ def main():
     p.add_argument("--n_cameras", type=int, default=1)
     p.add_argument("--group_by", default="subject",
                    choices=["window", "video", "subject"])
+    p.add_argument("--label_smoothing", type=float, default=0.1)
     args = p.parse_args()
 
     set_seed(args.seed)
@@ -148,7 +149,7 @@ def main():
         ).to(device)
         print(f"  Params: {sum(p.numel() for p in model.parameters()):,}")
 
-        criterion = nn.CrossEntropyLoss(label_smoothing=0.1)
+        criterion = nn.CrossEntropyLoss(label_smoothing=args.label_smoothing)
         optimizer = optim.AdamW(model.parameters(), lr=args.lr, weight_decay=args.weight_decay)
         scaler = GradScaler(enabled=(device.type == "cuda"))
         patience = 30

@@ -24,9 +24,12 @@ def export(
 
     ckpt_full = torch.load(checkpoint_path, map_location=device)
     ckpt_args = ckpt_full.get("args") if isinstance(ckpt_full, dict) else None
-    if input_features is None and ckpt_args:
-        n_cam = ckpt_args.get("n_cameras", 1)
-        input_features = (num_joints * 3) + (n_cam if n_cam > 1 else 0)
+    if ckpt_args:
+        if input_features is None:
+            n_cam = ckpt_args.get("n_cameras", 1)
+            input_features = (num_joints * 3) + (n_cam if n_cam > 1 else 0)
+        cnn_out = ckpt_args.get("cnn_out", cnn_out)
+        dropout = ckpt_args.get("dropout", 0.6)
 
     model = FERNv2(
         num_joints=num_joints,
@@ -34,7 +37,7 @@ def export(
         cnn_out=cnn_out,
         lstm_hidden=0,
         lstm_layers=1,
-        dropout=0.6,
+        dropout=dropout,
         input_features=input_features,
     ).to(device)
 

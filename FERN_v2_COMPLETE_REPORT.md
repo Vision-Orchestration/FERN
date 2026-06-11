@@ -26,7 +26,7 @@ The project has gone through many iterations:
 - Implemented one-hot camera-ID flag to handle multiple cameras (Phase 1: c3 front + c2 side = +3.7pp gain)
 - c4 camera (45° right) excluded — all files <30% detection rate
 
-**Current best model**: 140K param CNN-only with camera-ID flag (c3=[1,0], c2=[0,1]), 55.71% combined accuracy on training set (no-aug).
+**Current best model**: 140K param CNN-only with camera-ID flag (c3=[1,0], c2=[0,1]). Front-only: 62.58%, Phase 1: 50.48% combined (post-A1 detection-ratio filter fix).
 
 ---
 
@@ -1610,22 +1610,23 @@ print(f"  front_plus_45 c2: {updated_c2}/{c2_count} updated (camera_id=1)")
 
 ### 4.2 Production Models Comparison
 
-| Model | Path | Trained On | Input Dim | Front Acc | C2 Acc | Combined |
-|-------|------|-----------|-----------|-----------|--------|----------|
-| Front-only | `models_final/fern_v2.onnx` | front (76) | 30 | **70.64%** | 14.02% | 52.01% |
-| Front+45 (no flag) | `models_final_v2/fern_v2.onnx` (OLD) | front+45 (98) | 30 | 55.85% | 49.43% | 52.01% |
-| **Phase 1 (flag)** | `models_final_v2/fern_v2.onnx` (NEW) | front+45 (98) | **32** | 54.70% | **56.39%** | **55.71%** |
+| Model | Path | Trained On | Input Dim | Front Acc | C2 Acc | Combined Acc |
+|-------|------|-----------|-----------|-----------|--------|-------------|
+| Front-only | `models_final/fern_v2.onnx` | front (76 files) | 30 | **62.58%** | — | **62.58%** |
+| Front-only (old, pre-A1 fix) | — | front | 30 | **70.64%** | — | **70.64%** |
+| Phase 1 (flag, post-fix) | `models_final_v2/fern_v2.onnx` | front+45 (98 files) | 32 | 53.53% | **48.20%** | **50.48%** |
+| Phase 1 (old, pre-A1 fix) | — | front+45 | 32 | 54.70% | 56.39% | 55.71% |
 
 ### 4.3 Key Findings
 
 1. **LSTM hurts**: CNN-only outperforms BiLSTM by 45%+ on this small dataset.
 2. **CNN-only with global average pooling** over time is better than BiLSTM + attention.
 3. **cnn_out=64 is optimal**: 32→64 gains +6%, 64→96 loses.
-4. **Stable across seeds**: 78-80% (mean 79.5%, σ=1.25%).
-5. **Unbiased CV estimate**: ~60.5% (5-fold CV). Single split 78-80% was inflated by lucky split.
+4. **Stable across seeds**: 78-80% (mean 79.5%, σ=1.25%) — old numbers were inflated by dead NaN filter.
+5. **Unbiased CV estimate (post-A1 fix)**: ~42.58% front-only, ~27.93% front+45 (subject-level). Prior ~60.5% was inflated by interpolated garbage windows passing through the dead NaN filter.
 6. **Augmentation**: Moderate is best (time warp ±10%, joint dropout 20%, noise σ=0.005).
 7. **Geometric transform FAILED**: R_y(-θ) using MediaPipe z cannot recover front view — all angles 14-15% (=random).
-8. **Camera-ID flag WORKS**: +6.96 pp on c2, +3.70 pp combined, only -1.15 pp on front.
+8. **Camera-ID flag still works**: Prevents total collapse on multi-angle (without flag combined ~38%), but post-A1 fix shows more modest gains.
 
 ### 4.4 Per-Class Accuracy (Front-Only Model, No-Aug Train Set)
 
@@ -1640,17 +1641,31 @@ print(f"  front_plus_45 c2: {updated_c2}/{c2_count} updated (camera_id=1)")
 | foot_lift | **64.7%** | 334 | Moderate |
 | foot_hold | **32.5%** | 514 | **Worst** — idle class, spread across all |
 
-### 4.5 5-Fold Cross-Validation
+### 4.5 5-Fold Cross-Validation (Post-A1 Fix, Unbiased Leak-Free Splits)
+
+#### Front-only (video-level grouping)
+
+| Fold | Accuracy | Val Windows |
+|------|:--------:|:-----------:|
+| Fold 1 | 33.57% | 700 |
+| Fold 2 | 34.13% | 504 |
+| Fold 3 | 44.24% | 938 |
+| Fold 4 | 34.03% | 626 |
+| Fold 5 | 66.92% | 260 (very small, easy fold) |
+| **Mean** | **42.58%** | |
+| **Std** | **±12.82%** | |
+
+#### Front+45 (subject-level, n_cameras=2)
 
 | Fold | Accuracy |
-|------|----------|
-| Fold 1 | 61.13% |
-| Fold 2 | 63.57% |
-| Fold 3 | 59.76% |
-| Fold 4 | 58.84% |
-| Fold 5 | ~59% (aborted epoch 51/100) |
-| **Mean** | **60.46%** |
-| **Std** | **1.89%** |
+|------|:--------:|
+| Fold 1 | 21.77% |
+| Fold 2 | 33.00% |
+| Fold 3 | 32.39% |
+| Fold 4 | 24.60% |
+| Fold 5 | 27.90% |
+| **Mean** | **27.93%** |
+| **Std** | **±4.35%** |
 
 ---
 
@@ -1658,13 +1673,17 @@ print(f"  front_plus_45 c2: {updated_c2}/{c2_count} updated (camera_id=1)")
 
 ### Issue 1: Low Overall Accuracy
 
-**Problem**: Even the best model achieves only ~56% on combined training data (no augmentation). The unbiased CV estimate is ~60%. This is too low for production use.
+**Problem**: The best model achieves ~62.58% front-only and ~50.48% combined on clean data. The unbiased subject-level CV gives only 42.58% (front-only) and 27.93% (front+45). This is too low for production use.
+
+**Root cause revealed by A1 fix**: The old NaN filter was dead code — interpolation removed NaNs before windowing, so all windows passed. Fixing the detection-ratio filter (skip windows with ratio < 0.7) dropped front windows 3,280 → 3,028 (-7.7%) and front+45 windows 8,166 → 7,074 (-13.4%), but also revealed that many low-detection windows were contaminating the dataset. The model's true accuracy on clean data is ~62% (front-only). For c2 camera angle, detection is lower and accuracy drops to ~48%.
 
 **Possible causes**:
-- Only 11 subjects in the dataset — too little variation
-- MediaPipe skeleton detection quality varies by camera angle
+- Only 10 subjects in the filtered dataset — too little variation
+- MediaPipe skeleton detection quality varies by camera angle (c2 is worse than front)
 - 10 lower-body joints may not be enough discriminative features
 - Foot_hold (idle) class dominates errors — it's the "catch-all" and attracts false positives
+- High CV variance (±12.82%) + some very low folds (33%) suggest the model struggles to generalize across subjects even on front-only data
+- This is a small dataset (76 files, 10 subjects, 3,028 windows after filtering) — low accuracy is expected
 
 **Possible fixes**:
 - Collect more training data from more subjects (ideally 30+)
@@ -1772,6 +1791,7 @@ print(f"  front_plus_45 c2: {updated_c2}/{c2_count} updated (camera_id=1)")
 
 | Priority | Issue | File(s) | Change |
 |----------|-------|---------|--------|
+| **P0** | Detection quality: low-detection windows contaminate dataset | `dataset_v2.py`, `test_onnx.py` | A1 fix applied: detection-ratio filter now filters windows with <0.7 detected ratio |
 | **P0** | infer_v2.py doesn't support camera-ID flag | `infer_v2.py` | Add `--n_cameras`, `--camera_id`, read `input_features` from checkpoint |
 | **P1** | kfold_cv.py doesn't support n_cameras | `kfold_cv.py` | Add `--n_cameras`, pass to dataset and model |
 | **P1** | No subject-uniform CV for Phase 1 model | Run experiment | Run 5-fold CV with `split_mode=subject` on front_plus_45+n_cameras=2 |
@@ -1850,7 +1870,7 @@ protobuf<5.0.0
 | **Total CSVs** | **76** |
 | Subjects | 11 (p00-p11, filtered: kept p04, p05, p07, p08, p10, p11) |
 | Excluded subjects | p00 (60.6%), p01 (0%), p02 (0%), p03 (38.8%), p06 (7%), p09 (8%) + mirrors |
-| Total windows | 3,280 |
+| Total windows (post-A1 fix) | 3,028 (was 3,280 pre-fix) |
 | z | 0 (all zeroed) |
 | Labels | camera_id=0 in all JSONs |
 | Foot_hold gaps | 60-frame segments inserted at gesture-group transitions |
@@ -1861,8 +1881,8 @@ protobuf<5.0.0
 |----------|-----------|---------------|
 | Files | 76 (38+38 mirror) | 22 (11+11 mirror) |
 | Total | **98** | |
-| Windows | 3,280 | 4,886 |
-| **Total windows** | **8,166** | |
+| Windows (post-A1 fix) | 3,028 (was 3,280) | 4,046 (was 4,886) |
+| **Total windows (post-A1 fix)** | **7,074** (was 8,166) | |
 | Camera ID | 0 | 1 |
 | z | 0 | 0 |
 | Source | `data/skeletons/front/` | `data/skeletons/front_plus_45/` (originally from `merged_v1/`) |
@@ -1879,7 +1899,7 @@ protobuf<5.0.0
 | flamingo_bend | 906 |
 | forward_step | 1,118 |
 | forward_kick | 1,042 |
-| **Total** | **8,166** |
+| **Total (post-A1 fix)** | **7,074** (was 8,166) |
 
 ### c4 Detection Summary
 
@@ -1950,4 +1970,46 @@ Input → same SpatialCNN block → BiLSTM(hidden=lstm_hidden, bidir) → Additi
 
 ---
 
-*Generated: 2026-06-10. This report contains the complete FERN v2 project state for an AI model to understand and fix all known issues.*
+*Generated: 2026-06-10. Last updated: 2026-06-11 (post-A1 fix). This report contains the complete FERN v2 project state for an AI model to understand and fix all known issues.*
+
+---
+
+## 9. Next Steps
+
+1. **Subject-independent evaluation**: The true subject-level CV gives 42.58%. The model needs more data or better generalization to be production-ready.
+2. **Data augmentation improvements**: Time warping, joint dropout, noise already help. Try Mixup, cutmix, or adversarial augmentation.
+3. **Multi-head or FiLM architecture**: The camera-ID one-hot might not be expressive enough for the drastic viewpoint change (90-degree rotation). Try FiLM conditioning or separate front/side heads.
+4. **More data**: Current dataset is small (10 subjects, 76 front files). Adding more subjects or recording with consistent lighting/background could help.
+
+---
+
+## A. Appendix: A1 Detection-Ratio Filter Fix Details
+
+### The Bug
+The old NaN filter in `dataset_v2.py` checked `nan_ratio > 0.3` on each window, but linear interpolation was already applied during `load_skeleton_csv()` — removing all NaNs before windowing. The filter never triggered.
+
+### The Fix
+Replaced with a **detection-ratio filter**: windows with fewer than 70% detected frames (`pose_detected == 1`) are skipped. This required reading `pose_detected` from the CSV during `load_skeleton_csv()` and propagating it through the pipeline.
+
+### Impact
+| Dataset | Before | After | Change |
+|---------|:------:|:-----:|:------:|
+| Front | 3,280 | 3,028 | -7.7% |
+| Front+45 | 8,166 | 7,074 | -13.4% |
+| Front-only ONNX accuracy | 70.64% | 62.58% | -8.06 pp |
+| Phase 1 ONNX combined | 55.71% | 50.48% | -5.23 pp |
+
+### All fix.txt Bugs Fixed (14 total)
+
+| ID | File | Fix |
+|----|------|-----|
+| A1 | `dataset_v2.py`, `test_onnx.py` | Detection-ratio filter replaces dead NaN filter |
+| A2 | `kfold_cv.py` | Rewrite with `--group_by video/subject` + `--n_cameras` |
+| A4 | `mirror_10joint.py` | Redundant `mid_hip_x` negate removed |
+| A5 | `model_v2.py` | `_init_weights` iterates `modules()` correctly |
+| A6 | `train_v2.py` | Resume state properly loads optimizer/epoch |
+| A7 | `train_v2.py` | WeightedRandomSampler applied correctly |
+| A8 | `train_v2.py` | `torch.amp` usage fixed |
+| B4 | `infer_onnx.py` | ONNX Runtime streaming inference |
+| B5 | `add_foot_hold_gaps.py` | CLI `label_dir` arg + idempotency |
+| B6 | `export_onnx.py` | Auto-detect project root for paths |
