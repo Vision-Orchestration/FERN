@@ -4,13 +4,13 @@ data/
 # ── Docs (stale build artifacts, never track) ─────────────────────────────────
 docs/
 
-# ── Model checkpoints ──────────────────────────────────────────────────────
-# Keep models_final/, models_final_v2/, models_sweep/ — release artifacts
+# ── Experiment groups (noise) ────────────────────────────────────────────────
+# Keep final/, final_v2/, sweep/ — release artifacts
 # Everything else is experiment noise
-models/
-models_exp*/
-models_front*/
-models_front_plus_45/
+/models/
+exp[0-9]*/
+front/
+front_plus_45/
 
 # ── Python ──────────────────────────────────────────────────────────────────
 __pycache__/
