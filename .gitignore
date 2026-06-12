@@ -1,8 +1,8 @@
 # ── Data (large files, local-only, never track) ──────────────────────────────
 data/
 
-# ── Docs (stale build artifacts, never track) ─────────────────────────────────
-docs/
+# ── Docs (stale HTML build artifacts) ──────────────────────────────────────────
+docs/*.html
 
 # ── Experiment groups (noise) ────────────────────────────────────────────────
 # Keep final/, final_v2/, sweep/ — release artifacts
