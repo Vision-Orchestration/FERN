@@ -1,4 +1,18 @@
-# Python
+# ── Data (large files, local-only, never track) ──────────────────────────────
+data/
+
+# ── Docs (stale build artifacts, never track) ─────────────────────────────────
+docs/
+
+# ── Model checkpoints ──────────────────────────────────────────────────────
+# Keep models_final/, models_final_v2/, models_sweep/ — release artifacts
+# Everything else is experiment noise
+models/
+models_exp*/
+models_front*/
+models_front_plus_45/
+
+# ── Python ──────────────────────────────────────────────────────────────────
 __pycache__/
 *.py[cod]
 *.pyo
@@ -10,54 +24,48 @@ dist/
 build/
 .eggs/
 
-# Virtual environments
+# ── Virtual environments ────────────────────────────────────────────────────
 venv/
 .venv/
 env/
 
-# Logs
+# ── Logs & outputs ──────────────────────────────────────────────────────────
 logs/
 logs_*/
 *.log
 
-# OS
-.DS_Store
-Thumbs.db
-desktop.ini
-
-# Editor
-.vscode/
-.idea/
-*.swp
-
-# Jupyter
-.ipynb_checkpoints/
-
-# Offline packages
+# ── Offline packages ─────────────────────────────────────────────────────────
 offline_packages/
 
-# ffmpeg binaries
+# ── ffmpeg binaries ─────────────────────────────────────────────────────────
 ffmpeg*/
 
-# Archives
+# ── Archives ─────────────────────────────────────────────────────────────────
 *.zip
 *.tar.gz
 *.7z
 
-# MediaPipe model cache
+# ── MediaPipe model cache ─────────────────────────────────────────────────────
 .cache/
 
-# YOLO weights
+# ── OS junk ──────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── IDE ──────────────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+
+# ── Jupyter ───────────────────────────────────────────────────────────────────
+.ipynb_checkpoints/
+
+# ── YOLO weights ──────────────────────────────────────────────────────────────
 *.pt
 
-# Repomix output (full repo dump, too large for git)
+# ── Repomix ───────────────────────────────────────────────────────────────────
 repomix-output.xml
 
-# Stale experiment directories
-models/
-models_exp*/
-models_front*/
-models_front_plus_45/
-
-# Stale root-level skeleton CSVs from old recording sessions
-data/skeletons/*.csv
+# ── Stale root-level files ─────────────────────────────────────────────────────
+fern_banner.svg
