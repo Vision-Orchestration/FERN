@@ -3,6 +3,7 @@ data/
 
 # ── Docs (stale HTML build artifacts) ──────────────────────────────────────────
 docs/*.html
+!docs/index.html
 
 # ── Experiment groups (noise) ────────────────────────────────────────────────
 # Keep final/, final_v2/, sweep/ — release artifacts
