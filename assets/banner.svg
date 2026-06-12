@@ -1,85 +1,158 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 200" width="900" height="200">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 280" width="900" height="280">
   <defs>
-    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#0d1117"/>
-      <stop offset="100%" style="stop-color:#161b22"/>
-    </linearGradient>
-    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#58a6ff"/>
-      <stop offset="100%" style="stop-color:#3fb950"/>
-    </linearGradient>
+    <style>
+      .mono { font-family: ui-monospace,SFMono-Regular,Menlo,monospace; }
+      .sans { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+    </style>
   </defs>
-  <!-- Background -->
-  <rect width="900" height="200" fill="url(#bg)" rx="12"/>
-  <!-- Skeleton dots - decorative pose joints -->
-  <!-- Head -->
-  <circle cx="760" cy="42" r="6" fill="#58a6ff" opacity="0.6"/>
-  <!-- Neck -->
-  <circle cx="760" cy="62" r="4" fill="#58a6ff" opacity="0.5"/>
-  <!-- Shoulders -->
-  <circle cx="730" cy="78" r="4" fill="#58a6ff" opacity="0.5"/>
-  <circle cx="790" cy="78" r="4" fill="#58a6ff" opacity="0.5"/>
-  <!-- Hips -->
-  <circle cx="740" cy="120" r="4" fill="#3fb950" opacity="0.6"/>
-  <circle cx="780" cy="120" r="4" fill="#3fb950" opacity="0.6"/>
-  <!-- Mid-hip -->
-  <circle cx="760" cy="112" r="3" fill="#58a6ff" opacity="0.4"/>
-  <!-- Knees -->
-  <circle cx="735" cy="155" r="4" fill="#3fb950" opacity="0.5"/>
-  <circle cx="785" cy="148" r="4" fill="#3fb950" opacity="0.5"/>
-  <!-- Ankles -->
-  <circle cx="730" cy="185" r="5" fill="#f78166" opacity="0.8"/>
-  <circle cx="800" cy="173" r="5" fill="#f78166" opacity="0.8"/>
-  <!-- Skeleton lines -->
-  <line x1="760" y1="62" x2="730" y2="78" stroke="#58a6ff" stroke-width="1.5" opacity="0.3"/>
-  <line x1="760" y1="62" x2="790" y2="78" stroke="#58a6ff" stroke-width="1.5" opacity="0.3"/>
-  <line x1="760" y1="112" x2="740" y2="120" stroke="#3fb950" stroke-width="1.5" opacity="0.3"/>
-  <line x1="760" y1="112" x2="780" y2="120" stroke="#3fb950" stroke-width="1.5" opacity="0.3"/>
-  <line x1="740" y1="120" x2="735" y2="155" stroke="#3fb950" stroke-width="1.5" opacity="0.3"/>
-  <line x1="780" y1="120" x2="785" y2="148" stroke="#3fb950" stroke-width="1.5" opacity="0.3"/>
-  <line x1="735" y1="155" x2="730" y2="185" stroke="#f78166" stroke-width="2" opacity="0.5"/>
-  <line x1="785" y1="148" x2="800" y2="173" stroke="#f78166" stroke-width="2" opacity="0.5"/>
-  <line x1="760" y1="42" x2="760" y2="62" stroke="#58a6ff" stroke-width="1.5" opacity="0.3"/>
-  <line x1="760" y1="62" x2="760" y2="112" stroke="#58a6ff" stroke-width="1.5" opacity="0.3"/>
-  <!-- Left elbow / wrist suggestions -->
-  <circle cx="708" cy="105" r="3" fill="#58a6ff" opacity="0.4"/>
-  <circle cx="694" cy="130" r="3" fill="#58a6ff" opacity="0.35"/>
-  <line x1="730" y1="78" x2="708" y2="105" stroke="#58a6ff" stroke-width="1.2" opacity="0.25"/>
-  <line x1="708" y1="105" x2="694" y2="130" stroke="#58a6ff" stroke-width="1.2" opacity="0.2"/>
-  <!-- Grid dots subtle -->
-  <g opacity="0.06">
-    <circle cx="820" cy="30" r="1.5" fill="white"/>
-    <circle cx="845" cy="30" r="1.5" fill="white"/>
-    <circle cx="870" cy="30" r="1.5" fill="white"/>
-    <circle cx="820" cy="55" r="1.5" fill="white"/>
-    <circle cx="845" cy="55" r="1.5" fill="white"/>
-    <circle cx="870" cy="55" r="1.5" fill="white"/>
-    <circle cx="820" cy="80" r="1.5" fill="white"/>
-    <circle cx="845" cy="80" r="1.5" fill="white"/>
-    <circle cx="870" cy="80" r="1.5" fill="white"/>
+
+  <!-- BG -->
+  <rect width="900" height="280" fill="#0d1117"/>
+
+  <!-- Subtle grid -->
+  <g opacity="0.035" stroke="#ffffff" stroke-width="0.5">
+    <line x1="0" y1="56" x2="900" y2="56"/>
+    <line x1="0" y1="112" x2="900" y2="112"/>
+    <line x1="0" y1="168" x2="900" y2="168"/>
+    <line x1="0" y1="224" x2="900" y2="224"/>
+    <line x1="180" y1="0" x2="180" y2="280"/>
+    <line x1="360" y1="0" x2="360" y2="280"/>
+    <line x1="540" y1="0" x2="540" y2="280"/>
+    <line x1="720" y1="0" x2="720" y2="280"/>
   </g>
-  <!-- Accent top bar -->
-  <rect x="60" y="0" width="120" height="3" fill="url(#accent)" rx="2"/>
-  <!-- Tag -->
-  <rect x="60" y="28" width="85" height="22" rx="11" fill="#21262d"/>
-  <text x="102" y="43" font-family="ui-monospace,SFMono-Regular,monospace" font-size="11" fill="#3fb950" text-anchor="middle">v2 · Alpha</text>
-  <!-- Title -->
-  <text x="60" y="100" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="62" font-weight="800" fill="white" letter-spacing="-2">FERN</text>
-  <!-- Subtitle -->
-  <text x="60" y="128" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="16" font-weight="400" fill="#8b949e">Foot gEsture Recognition Network</text>
-  <!-- Divider -->
-  <line x1="60" y1="145" x2="620" y2="145" stroke="#30363d" stroke-width="1"/>
-  <!-- Stats row -->
-  <text x="60" y="170" font-family="ui-monospace,SFMono-Regular,monospace" font-size="12" fill="#58a6ff">93.67%</text>
-  <text x="60" y="186" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="10" fill="#484f58">Top-1 Accuracy</text>
-  <text x="170" y="170" font-family="ui-monospace,SFMono-Regular,monospace" font-size="12" fill="#58a6ff">98.73%</text>
-  <text x="170" y="186" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="10" fill="#484f58">Top-3 Accuracy</text>
-  <text x="280" y="170" font-family="ui-monospace,SFMono-Regular,monospace" font-size="12" fill="#3fb950">100%</text>
-  <text x="280" y="186" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="10" fill="#484f58">Detection Rate</text>
-  <text x="380" y="170" font-family="ui-monospace,SFMono-Regular,monospace" font-size="12" fill="#3fb950">823K</text>
-  <text x="380" y="186" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="10" fill="#484f58">Parameters</text>
-  <text x="465" y="170" font-family="ui-monospace,SFMono-Regular,monospace" font-size="12" fill="#d29922">35</text>
-  <text x="465" y="186" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="10" fill="#484f58">Subjects</text>
-  <text x="530" y="170" font-family="ui-monospace,SFMono-Regular,monospace" font-size="12" fill="#d29922">7</text>
-  <text x="530" y="186" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="10" fill="#484f58">Gesture Classes</text>
+
+  <!-- ── SKELETON FIGURE (right side) ── -->
+
+  <!-- bone lines first (behind joints) -->
+  <!-- spine -->
+  <line x1="748" y1="75" x2="748" y2="145" stroke="#58a6ff" stroke-width="1.5" opacity="0.35"/>
+  <!-- shoulders -->
+  <line x1="710" y1="95" x2="786" y2="95" stroke="#58a6ff" stroke-width="1.5" opacity="0.35"/>
+  <!-- L arm -->
+  <line x1="710" y1="95" x2="690" y2="130" stroke="#58a6ff" stroke-width="1.2" opacity="0.28"/>
+  <line x1="690" y1="130" x2="678" y2="158" stroke="#58a6ff" stroke-width="1.2" opacity="0.22"/>
+  <!-- R arm -->
+  <line x1="786" y1="95" x2="806" y2="130" stroke="#58a6ff" stroke-width="1.2" opacity="0.28"/>
+  <line x1="806" y1="130" x2="818" y2="158" stroke="#58a6ff" stroke-width="1.2" opacity="0.22"/>
+  <!-- hips -->
+  <line x1="725" y1="145" x2="771" y2="145" stroke="#3fb950" stroke-width="1.5" opacity="0.35"/>
+  <!-- L leg -->
+  <line x1="725" y1="145" x2="718" y2="195" stroke="#3fb950" stroke-width="1.5" opacity="0.32"/>
+  <!-- R leg: kicked forward gesture -->
+  <line x1="771" y1="145" x2="800" y2="188" stroke="#3fb950" stroke-width="1.5" opacity="0.32"/>
+  <!-- L lower leg -->
+  <line x1="718" y1="195" x2="712" y2="245" stroke="#f78166" stroke-width="2" opacity="0.55"/>
+  <!-- R lower leg: kicking - stops at knee level -->
+  <line x1="800" y1="188" x2="842" y2="175" stroke="#f78166" stroke-width="2" opacity="0.7"/>
+
+  <!-- motion trail for kick -->
+  <line x1="836" y1="178" x2="858" y2="172" stroke="#f78166" stroke-width="1.5" opacity="0.35" stroke-dasharray="3,3"/>
+  <line x1="852" y1="175" x2="872" y2="170" stroke="#f78166" stroke-width="1" opacity="0.2" stroke-dasharray="2,4"/>
+
+  <!-- joint dots -->
+  <!-- head -->
+  <circle cx="748" cy="62" r="8" fill="none" stroke="#58a6ff" stroke-width="1.5" opacity="0.7"/>
+  <circle cx="748" cy="62" r="3" fill="#58a6ff" opacity="0.6"/>
+  <!-- neck -->
+  <circle cx="748" cy="75" r="3.5" fill="#58a6ff" opacity="0.5"/>
+  <!-- L shoulder -->
+  <circle cx="710" cy="95" r="5" fill="#21262d" stroke="#58a6ff" stroke-width="1.5" opacity="0.8"/>
+  <!-- R shoulder -->
+  <circle cx="786" cy="95" r="5" fill="#21262d" stroke="#58a6ff" stroke-width="1.5" opacity="0.8"/>
+  <!-- L elbow -->
+  <circle cx="690" cy="130" r="4" fill="#21262d" stroke="#58a6ff" stroke-width="1.2" opacity="0.6"/>
+  <!-- R elbow -->
+  <circle cx="806" cy="130" r="4" fill="#21262d" stroke="#58a6ff" stroke-width="1.2" opacity="0.6"/>
+  <!-- mid-hip -->
+  <circle cx="748" cy="145" r="4" fill="#21262d" stroke="#3fb950" stroke-width="1.2" opacity="0.7"/>
+  <!-- L hip -->
+  <circle cx="725" cy="145" r="5" fill="#21262d" stroke="#3fb950" stroke-width="1.5" opacity="0.8"/>
+  <!-- R hip -->
+  <circle cx="771" cy="145" r="5" fill="#21262d" stroke="#3fb950" stroke-width="1.5" opacity="0.8"/>
+  <!-- L knee -->
+  <circle cx="718" cy="195" r="5" fill="#21262d" stroke="#3fb950" stroke-width="1.5" opacity="0.7"/>
+  <!-- R knee (kick) -->
+  <circle cx="800" cy="188" r="5" fill="#21262d" stroke="#f78166" stroke-width="1.5" opacity="0.8"/>
+  <!-- L ankle -->
+  <circle cx="712" cy="245" r="6" fill="#21262d" stroke="#f78166" stroke-width="2" opacity="0.9"/>
+  <!-- R foot (kicked) - bright accent -->
+  <circle cx="842" cy="175" r="7" fill="#f78166" opacity="0.9"/>
+  <circle cx="842" cy="175" r="10" fill="none" stroke="#f78166" stroke-width="1" opacity="0.4"/>
+
+  <!-- ── MEDIAPIPE BOUNDING BOX ── -->
+  <rect x="668" y="40" width="220" height="235" rx="4" fill="none" stroke="#58a6ff" stroke-width="0.8" stroke-dasharray="4,3" opacity="0.2"/>
+  <!-- corner ticks -->
+  <line x1="668" y1="40" x2="684" y2="40" stroke="#58a6ff" stroke-width="1.5" opacity="0.5"/>
+  <line x1="668" y1="40" x2="668" y2="56" stroke="#58a6ff" stroke-width="1.5" opacity="0.5"/>
+  <line x1="888" y1="40" x2="872" y2="40" stroke="#58a6ff" stroke-width="1.5" opacity="0.5"/>
+  <line x1="888" y1="40" x2="888" y2="56" stroke="#58a6ff" stroke-width="1.5" opacity="0.5"/>
+  <line x1="668" y1="275" x2="684" y2="275" stroke="#58a6ff" stroke-width="1.5" opacity="0.5"/>
+  <line x1="668" y1="275" x2="668" y2="259" stroke="#58a6ff" stroke-width="1.5" opacity="0.5"/>
+  <line x1="888" y1="275" x2="872" y2="275" stroke="#58a6ff" stroke-width="1.5" opacity="0.5"/>
+  <line x1="888" y1="275" x2="888" y2="259" stroke="#58a6ff" stroke-width="1.5" opacity="0.5"/>
+  <!-- confidence label -->
+  <text x="778" y="36" class="mono sans" font-size="9" fill="#3fb950" text-anchor="middle" opacity="0.7">foot_lift 0.97</text>
+
+  <!-- ── LEFT PANEL: TITLE BLOCK ── -->
+  <!-- top accent bar -->
+  <rect x="52" y="0" width="3" height="280" fill="#58a6ff" opacity="0.8"/>
+
+  <!-- eyebrow tag -->
+  <rect x="66" y="36" width="130" height="20" rx="10" fill="#161b22"/>
+  <rect x="66" y="36" width="130" height="20" rx="10" fill="none" stroke="#30363d" stroke-width="1"/>
+  <text x="131" y="50" class="mono sans" font-size="10" fill="#3fb950" text-anchor="middle" letter-spacing="1">VISION-ORCHESTRATION</text>
+
+  <!-- FERN  big title -->
+  <text x="66" y="138" class="sans" font-size="88" font-weight="800" fill="#ffffff" letter-spacing="-4">FERN</text>
+
+  <!-- acronym expansion with highlighted letters -->
+  <text x="68" y="168" class="sans" font-size="15" fill="#8b949e" letter-spacing="0.5">
+    <tspan fill="#e6edf3" font-weight="600">F</tspan>
+    <tspan>oot </tspan>
+    <tspan fill="#e6edf3" font-weight="600">g</tspan>
+    <tspan>E</tspan>
+    <tspan fill="#e6edf3" font-weight="600">s</tspan>
+    <tspan>ture </tspan>
+    <tspan fill="#e6edf3" font-weight="600">R</tspan>
+    <tspan>ecognition </tspan>
+    <tspan fill="#e6edf3" font-weight="600">N</tspan>
+    <tspan>etwork</tspan>
+  </text>
+
+  <!-- divider -->
+  <line x1="66" y1="184" x2="630" y2="184" stroke="#30363d" stroke-width="1"/>
+
+  <!-- stat pills row -->
+  <!-- stat 1 -->
+  <rect x="66" y="200" width="88" height="46" rx="6" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <text x="110" y="218" class="mono sans" font-size="18" font-weight="700" fill="#58a6ff" text-anchor="middle">86.3%</text>
+  <text x="110" y="234" class="sans" font-size="9" fill="#484f58" text-anchor="middle" letter-spacing="0.5">ONNX ACC</text>
+
+  <!-- stat 2 -->
+  <rect x="162" y="200" width="88" height="46" rx="6" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <text x="206" y="218" class="mono sans" font-size="18" font-weight="700" fill="#58a6ff" text-anchor="middle">44.4%</text>
+  <text x="206" y="234" class="sans" font-size="9" fill="#484f58" text-anchor="middle" letter-spacing="0.5">3-FOLD CV</text>
+
+  <!-- stat 3 -->
+  <rect x="258" y="200" width="88" height="46" rx="6" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <text x="302" y="218" class="mono sans" font-size="18" font-weight="700" fill="#3fb950" text-anchor="middle">∼526K</text>
+  <text x="302" y="234" class="sans" font-size="9" fill="#484f58" text-anchor="middle" letter-spacing="0.5">PARAMS</text>
+
+  <!-- stat 4 -->
+  <rect x="354" y="200" width="88" height="46" rx="6" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <text x="398" y="218" class="mono sans" font-size="18" font-weight="700" fill="#3fb950" text-anchor="middle">10</text>
+  <text x="398" y="234" class="sans" font-size="9" fill="#484f58" text-anchor="middle" letter-spacing="0.5">SUBJECTS</text>
+
+  <!-- stat 5 -->
+  <rect x="450" y="200" width="88" height="46" rx="6" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <text x="494" y="218" class="mono sans" font-size="18" font-weight="700" fill="#d29922" text-anchor="middle">8</text>
+  <text x="494" y="234" class="sans" font-size="9" fill="#484f58" text-anchor="middle" letter-spacing="0.5">GESTURES</text>
+
+  <!-- stat 6 -->
+  <rect x="546" y="200" width="88" height="46" rx="6" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <text x="590" y="218" class="mono sans" font-size="18" font-weight="700" fill="#d29922" text-anchor="middle">CNN</text>
+  <text x="590" y="234" class="sans" font-size="9" fill="#484f58" text-anchor="middle" letter-spacing="0.5">ARCH</text>
+
+  <!-- version + alpha badge -->
+  <text x="68" y="264" class="mono sans" font-size="11" fill="#484f58">v2.0 · Alpha · MIT · Python 3.11 · PyTorch 2.2</text>
 </svg>
