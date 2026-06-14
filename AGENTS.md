@@ -16,9 +16,9 @@
 - `data/labels/front_plus_45/` — 98 JSONs (c3=0, c2=1)
 - `data/skeletons/merged_v1/` — All raw extracted skeletons including c4 files
 - `data/labels/merged_v1/` — Label JSONs (camera_ids NOT set for c4)
-- `models_final/` — Old front-only model `.pth` + `.onnx` (cnn_out=64, 62.58%)
-- `models_final_v2/` — Phase 1 (c3+c2 with n_cameras=2) model `.pth` + `.onnx` (50.48%)
-- `models_sweep/` — Optimal config model `.pth` + `.onnx` (cnn_out=128, dropout=0.3, 86.29%)
+- `final/models/` — Old front-only model `.pth` + `.onnx` (cnn_out=64, 62.58%)
+- `final_v2/models/` — Phase 1 (c3+c2 with n_cameras=2) model `.pth` + `.onnx` (50.48%)
+- `sweep/models/` — Optimal config model `.pth` + `.onnx` (cnn_out=128, dropout=0.3, 86.29%)
 
 ## Best Config (sweep optimal)
 ```
@@ -46,25 +46,25 @@ moderate aug: time_warp ±10%, joint_dropout 20%, noise σ=0.005
 ## Key Commands
 ```powershell
 # Train optimal config (front-only, cnn_out=128, dropout=0.3)
-python src/train_v2.py --skeleton_dir data/skeletons/front --label_dir data/labels/front --output_dir models_sweep --log_dir logs_sweep --epochs 200 --warmup_epochs 20 --batch_size 32 --window_size 60 --stride 15 --lr 3e-4 --weight_decay 1e-2 --dropout 0.3 --cnn_out 128 --lstm_hidden 0 --lstm_layers 1 --device cuda --num_workers 0 --train_all
+python src/train_v2.py --skeleton_dir data/skeletons/front --label_dir data/labels/front --output_dir sweep --log_dir sweep/logs --epochs 200 --warmup_epochs 20 --batch_size 32 --window_size 60 --stride 15 --lr 3e-4 --weight_decay 1e-2 --dropout 0.3 --cnn_out 128 --lstm_hidden 0 --lstm_layers 1 --device cuda --num_workers 0 --train_all
 
 # Train Phase 1 (c3+c2 with camera-ID flag)
-python src/train_v2.py --skeleton_dir data/skeletons/front_plus_45 --label_dir data/labels/front_plus_45 --output_dir models_final_v2 --log_dir logs_final_v2 --epochs 200 --warmup_epochs 20 --batch_size 32 --window_size 60 --stride 15 --lr 3e-4 --weight_decay 1e-2 --dropout 0.6 --cnn_out 64 --lstm_hidden 0 --lstm_layers 1 --device cuda --num_workers 0 --n_cameras 2 --train_all
+python src/train_v2.py --skeleton_dir data/skeletons/front_plus_45 --label_dir data/labels/front_plus_45 --output_dir final_v2 --log_dir final_v2/logs --epochs 200 --warmup_epochs 20 --batch_size 32 --window_size 60 --stride 15 --lr 3e-4 --weight_decay 1e-2 --dropout 0.6 --cnn_out 64 --lstm_hidden 0 --lstm_layers 1 --device cuda --num_workers 0 --n_cameras 2 --train_all
 
 # Resume training from checkpoint
-python src/train_v2.py ... --resume models_final_v2/fern_v2_latest.pth
+python src/train_v2.py ... --resume final_v2/models/fern_v2_latest.pth
 
 # Export to ONNX
-python src/export_onnx.py --checkpoint_path models_final_v2/fern_v2_latest.pth --output_path models_final_v2/fern_v2.onnx
+python src/export_onnx.py --checkpoint_path final_v2/models/fern_v2_latest.pth --output_path final_v2/models/fern_v2.onnx
 
 # Test ONNX accuracy + per-camera breakdown
-python src/test_onnx.py --onnx_path models_final_v2/fern_v2.onnx --skeleton_dir data/skeletons/front_plus_45 --label_dir data/labels/front_plus_45 --n_cameras 2 --window_size 60 --stride 15
+python src/test_onnx.py --onnx_path final_v2/models/fern_v2.onnx --skeleton_dir data/skeletons/front_plus_45 --label_dir data/labels/front_plus_45 --n_cameras 2 --window_size 60 --stride 15
 
 # 3-fold CV (front-only)
 python src/kfold_cv.py --skeleton_dir data/skeletons/front --label_dir data/labels/front --epochs 50 --warmup_epochs 15 --batch_size 32 --window_size 60 --stride 15 --lr 3e-4 --weight_decay 1e-2 --dropout 0.6 --cnn_out 64 --k_folds 3 --device cuda --num_workers 0 --group_by subject
 
 # Live inference
-python src/infer_v2.py --model models_sweep/fern_v2_latest.pth --camera_id 0 --window_size 60 --stride 10 --threshold 0.6
+python src/infer_v2.py --model sweep/models/fern_v2_latest.pth --camera_id 0 --window_size 60 --stride 10 --threshold 0.6
 ```
 
 ## Experiment Results
@@ -87,9 +87,9 @@ python src/infer_v2.py --model models_sweep/fern_v2_latest.pth --camera_id 0 --w
 ## Production Models
 | Model | Path | Trained On | Input Dim | Params | Front Acc |
 |-------|------|-----------|:---------:|:------:|:---------:|
-| Old front-only | `models_final/fern_v2.onnx` | front (76 files) | 30 | 132K | 62.58% |
-| **Sweep optimal** | **`models_sweep/fern_v2.onnx`** | **front (76 files)** | **30** | **526K** | **86.29%** |
-| Phase 1 (flag) | `models_final_v2/fern_v2.onnx` | front+45 (98 files) | 32 | 140K | 50.48% |
+| Old front-only | `final/models/fern_v2.onnx` | front (76 files) | 30 | 132K | 62.58% |
+| **Sweep optimal** | **`sweep/models/fern_v2.onnx`** | **front (76 files)** | **30** | **526K** | **86.29%** |
+| Phase 1 (flag) | `final_v2/models/fern_v2.onnx` | front+45 (98 files) | 32 | 140K | 50.48% |
 
 ## Key Findings
 1. **LSTM hurts**: CNN-only outperforms BiLSTM by 45%+ on this small dataset
@@ -116,11 +116,11 @@ python src/infer_v2.py --model models_sweep/fern_v2_latest.pth --camera_id 0 --w
 
 ## Resources
 - Full report: `FERN_v2_COMPLETE_REPORT.md`
-- Sweep optimal checkpoint: `models_sweep/fern_v2_latest.pth` (526K params, 86.29% ONNX)
-- Sweep optimal ONNX: `models_sweep/fern_v2.onnx` (86.29% front-only)
-- Phase 1 (flag) checkpoint: `models_final_v2/fern_v2_latest.pth`
-- Phase 1 ONNX: `models_final_v2/fern_v2.onnx` (50.48% combined)
-- Old front-only ONNX: `models_final/fern_v2.onnx` (62.58%)
+- Sweep optimal checkpoint: `sweep/models/fern_v2_latest.pth` (526K params, 86.29% ONNX)
+- Sweep optimal ONNX: `sweep/models/fern_v2.onnx` (86.29% front-only)
+- Phase 1 (flag) checkpoint: `final_v2/models/fern_v2_latest.pth`
+- Phase 1 ONNX: `final_v2/models/fern_v2.onnx` (50.48% combined)
+- Old front-only ONNX: `final/models/fern_v2.onnx` (62.58%)
 - Sweep logs: `sweep_*.log`
 - Camera flag plan: `CAMERA_FLAG_AGENT.md`
 - Transform attempt: `docs/FERN_TRANSFORM_AGENT.md`
