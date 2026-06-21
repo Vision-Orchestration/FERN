@@ -142,10 +142,10 @@ C:\Users\<user>\.cache\mediapipe\models\pose_landmarker_heavy.task
 
 ```powershell
 # Webcam
-python src\infer_v2.py --model models_sweep\fern_v2.onnx --camera_id 0
+python src\infer_v2.py --model sweep\models\fern_v2.onnx --camera_id 0
 
 # Video file
-python src\infer_v2.py --model models_sweep\fern_v2.onnx --camera_id "path\to\video.mp4"
+python src\infer_v2.py --model sweep\models\fern_v2.onnx --camera_id "path\to\video.mp4"
 ```
 
 ---
@@ -171,14 +171,14 @@ python src\extract_skeleton.py --video_dir data\raw --output_dir data\skeletons
 ### 3. Train (optimal config)
 
 ```powershell
-python src\train_v2.py --skeleton_dir data\skeletons\front --label_dir data\labels\front --output_dir models_sweep --epochs 200 --warmup_epochs 20 --batch_size 32 --window_size 60 --stride 15 --lr 3e-4 --weight_decay 1e-2 --dropout 0.3 --cnn_out 128 --lstm_hidden 0 --device cuda --num_workers 0 --train_all
+python src\train_v2.py --skeleton_dir data\skeletons\front --label_dir data\labels\front --output_dir sweep --epochs 200 --warmup_epochs 20 --batch_size 32 --window_size 60 --stride 15 --lr 3e-4 --weight_decay 1e-2 --dropout 0.3 --cnn_out 128 --lstm_hidden 0 --device cuda --num_workers 0 --train_all
 ```
 
 ### 4. Export to ONNX & evaluate
 
 ```powershell
-python src\export_onnx.py --checkpoint_path models_sweep\fern_v2_latest.pth --output_path models_sweep\fern_v2.onnx
-python src\test_onnx.py --onnx_path models_sweep\fern_v2.onnx --skeleton_dir data\skeletons\front --label_dir data\labels\front --window_size 60 --stride 15
+python src\export_onnx.py --checkpoint_path sweep\models\fern_v2_latest.pth --output_path sweep\models\fern_v2.onnx
+python src\test_onnx.py --onnx_path sweep\models\fern_v2.onnx --skeleton_dir data\skeletons\front --label_dir data\labels\front --window_size 60 --stride 15
 ```
 
 ---
@@ -231,9 +231,9 @@ DroidCam phones  ──RTSP──►  MediaMTX  ──RTSP──►  Python (Ope
 
 | Model | Path | Params | Front Acc |
 |-------|------|:------:|:---------:|
-| Old front-only | `models_final/fern_v2.onnx` | 132K | 62.58% |
-| **Sweep optimal** | **`models_sweep/fern_v2.onnx`** | **526K** | **86.29%** |
-| Phase 1 (camera-flag) | `models_final_v2/fern_v2.onnx` | 140K | 50.48% |
+| Old front-only | `final/models/fern_v2.onnx` | 132K | 62.58% |
+| **Sweep optimal** | **`sweep/models/fern_v2.onnx`** | **526K** | **86.29%** |
+| Phase 1 (camera-flag) | `final_v2/models/fern_v2.onnx` | 140K | 50.48% |
 
 ---
 
@@ -302,9 +302,9 @@ FERN/
 │   ├── add_foot_hold_gaps.py    # Insert idle gaps at transitions
 │   ├── mirror_dataset.py        # LR skeleton augmentation
 │   └── merge_v1_database.py     # FERN v1 clip merger
-├── models_final/                # Old front-only (132K, 62.58%)
-├── models_final_v2/             # Phase 1 camera-flag (140K, 50.48%)
-├── models_sweep/                # Sweep optimal (526K, 86.29%)
+├── final/                       # Old front-only models/ (132K, 62.58%)
+├── final_v2/                    # Phase 1 camera-flag models/ (140K, 50.48%)
+├── sweep/                       # Sweep optimal models/ (526K, 86.29%)
 ├── assets/
 │   └── banner.svg
 ├── AGENTS.md                    # AI agent knowledge
