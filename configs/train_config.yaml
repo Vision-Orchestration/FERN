@@ -1,0 +1,41 @@
+# FERN v2 Training Configuration
+# ===============================
+# Overrides CLI defaults. Usage:
+#   from config_loader import merge_config
+#   args = parse_args()
+#   merge_config(args)           # loads configs/train_config.yaml
+#
+# Values here match current CLI defaults.
+# Uncomment and change any value to override.
+
+# ── Data ────────────────────────────────────────────────────────────
+data:
+  skeleton_dir: "data/skeletons"
+  label_dir:    "data/labels"
+  window_size:  60
+  stride:       15
+  num_workers:  0               # Windows: keep 0 (multiprocessing hangs)
+  split_mode:   "random"        # choices: random, subject
+
+# ── Model ─────────────────────────────────────────────────────────────
+model:
+  cnn_out:      32
+  lstm_hidden:  64
+  lstm_layers:  2
+  dropout:      0.5
+
+# ── Training ─────────────────────────────────────────────────────────
+training:
+  epochs:           100
+  warmup_epochs:    10
+  batch_size:       32
+  lr:               3.0e-4
+  weight_decay:     1.0e-2
+  label_smoothing:  0.1
+  patience:         15
+  early_stopping_metric: "loss"   # choices: acc, loss
+
+# ── Paths ─────────────────────────────────────────────────────────────
+paths:
+  output_dir: "models"
+  log_dir:    "logs"

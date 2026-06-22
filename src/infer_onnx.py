@@ -28,7 +28,7 @@ class StreamingClassifier:
     """Reusable streaming wrapper: push frames, poll predictions."""
 
     def __init__(self, onnx_path, window_size=60, stride=10,
-                 camera_view=None, threshold=0.6):
+                 camera_view=None, threshold=0.5):
         providers = ["CUDAExecutionProvider", "CPUExecutionProvider"]
         self.session = ort.InferenceSession(onnx_path, providers=providers)
         inp = self.session.get_inputs()[0]
@@ -93,7 +93,7 @@ def main():
                    help="One-hot index: 0=front(c3), 1=side(c2) — required for multi-camera models")
     p.add_argument("--window_size", type=int, default=60)
     p.add_argument("--stride", type=int, default=10)
-    p.add_argument("--threshold", type=float, default=0.6)
+    p.add_argument("--threshold", type=float, default=0.5)
     args = p.parse_args()
 
     clf = StreamingClassifier(

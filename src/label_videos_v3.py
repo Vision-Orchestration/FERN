@@ -103,6 +103,16 @@ def _build_segments(events, sequence):
     """
     starts = [e for e in events if e['type'] == 'start']
     ends   = [e for e in events if e['type'] == 'end']
+
+    # Validate event interleaving
+    if len(starts) != len(ends):
+        print(f"  WARNING: {len(starts)} start events but {len(ends)} end events — "
+              f"pairs may be misaligned")
+    for i in range(1, len(events)):
+        if events[i]['type'] == events[i-1]['type']:
+            print(f"  WARNING: Consecutive {events[i]['type']} events at frame "
+                  f"{events[i]['frame']} — possible double-press")
+
     segments = []
     for i, s in enumerate(starts):
         if i < len(ends):

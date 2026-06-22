@@ -286,7 +286,7 @@ def main():
         _, actual_frames, _, _ = actual_info
 
         label = build_label_json(
-            clips, str(out_mp4), actual_frames,
+            good_clips, str(out_mp4), actual_frames,
             target_fps,
         )
 

@@ -28,14 +28,14 @@ Log "Step 2 done in $($elapsed.TotalMinutes.ToString('0.0')) min"
 # Step 3: Train front-only production model (train_all)
 Log "Step 3: Train front-only production model (200 epochs, train_all)"
 $start = Get-Date
-& $py src/train_v2.py --skeleton_dir data/skeletons/front --label_dir data/labels/front --output_dir models_final --log_dir logs_final --epochs 200 --warmup_epochs 20 --batch_size 32 --window_size 60 --stride 15 --lr 3e-4 --weight_decay 1e-2 --dropout 0.6 --cnn_out 64 --lstm_hidden 0 --device cuda --num_workers 4 --train_all 2>&1 | Out-File -Append -LiteralPath $log
+& $py src/train_v2.py --skeleton_dir data/skeletons/front --label_dir data/labels/front --output_dir models_final --log_dir logs_final --epochs 200 --warmup_epochs 20 --batch_size 32 --window_size 60 --stride 15 --lr 3e-4 --weight_decay 1e-2 --dropout 0.6 --cnn_out 64 --lstm_hidden 0 --device cuda --num_workers 0 --train_all 2>&1 | Out-File -Append -LiteralPath $log
 $elapsed = (Get-Date) - $start
 Log "Step 3 done in $($elapsed.TotalMinutes.ToString('0.0')) min"
 
 # Step 4: Train front+45 Phase 1 model (train_all, n_cameras=2)
 Log "Step 4: Train front+45 Phase 1 (200 epochs, train_all, n_cameras=2)"
 $start = Get-Date
-& $py src/train_v2.py --skeleton_dir data/skeletons/front_plus_45 --label_dir data/labels/front_plus_45 --output_dir models_final_v2 --log_dir logs_final_v2 --epochs 200 --warmup_epochs 20 --batch_size 32 --window_size 60 --stride 15 --lr 3e-4 --weight_decay 1e-2 --dropout 0.6 --cnn_out 64 --lstm_hidden 0 --device cuda --num_workers 4 --n_cameras 2 --train_all 2>&1 | Out-File -Append -LiteralPath $log
+& $py src/train_v2.py --skeleton_dir data/skeletons/front_plus_45 --label_dir data/labels/front_plus_45 --output_dir models_final_v2 --log_dir logs_final_v2 --epochs 200 --warmup_epochs 20 --batch_size 32 --window_size 60 --stride 15 --lr 3e-4 --weight_decay 1e-2 --dropout 0.6 --cnn_out 64 --lstm_hidden 0 --device cuda --num_workers 0 --n_cameras 2 --train_all 2>&1 | Out-File -Append -LiteralPath $log
 $elapsed = (Get-Date) - $start
 Log "Step 4 done in $($elapsed.TotalMinutes.ToString('0.0')) min"
 

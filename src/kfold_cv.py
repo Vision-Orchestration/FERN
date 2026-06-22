@@ -88,7 +88,7 @@ def main():
     p.add_argument("--cnn_out", type=int, default=64)
     p.add_argument("--lstm_hidden", type=int, default=0)
     p.add_argument("--lstm_layers", type=int, default=1)
-    p.add_argument("--num_workers", type=int, default=4)
+    p.add_argument("--num_workers", type=int, default=0)
     p.add_argument("--device", default="cuda")
     p.add_argument("--k_folds", type=int, default=5)
     p.add_argument("--seed", type=int, default=42)

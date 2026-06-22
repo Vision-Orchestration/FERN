@@ -51,10 +51,10 @@ python src/train_v2.py --skeleton_dir data/skeletons/front --label_dir data/labe
 # Train Phase 1 (c3+c2 with camera-ID flag)
 python src/train_v2.py --skeleton_dir data/skeletons/front_plus_45 --label_dir data/labels/front_plus_45 --output_dir final_v2 --log_dir final_v2/logs --epochs 200 --warmup_epochs 20 --batch_size 32 --window_size 60 --stride 15 --lr 3e-4 --weight_decay 1e-2 --dropout 0.6 --cnn_out 64 --lstm_hidden 0 --lstm_layers 1 --device cuda --num_workers 0 --n_cameras 2 --train_all
 
-# Resume training from checkpoint
+# Resume training from checkpoint (loads saved args for model construction)
 python src/train_v2.py ... --resume final_v2/models/fern_v2_latest.pth
 
-# Export to ONNX
+# Export to ONNX (auto-reads num_classes, cnn_out, dropout from checkpoint)
 python src/export_onnx.py --checkpoint_path final_v2/models/fern_v2_latest.pth --output_path final_v2/models/fern_v2.onnx
 
 # Test ONNX accuracy + per-camera breakdown
@@ -63,8 +63,14 @@ python src/test_onnx.py --onnx_path final_v2/models/fern_v2.onnx --skeleton_dir 
 # 3-fold CV (front-only)
 python src/kfold_cv.py --skeleton_dir data/skeletons/front --label_dir data/labels/front --epochs 50 --warmup_epochs 15 --batch_size 32 --window_size 60 --stride 15 --lr 3e-4 --weight_decay 1e-2 --dropout 0.6 --cnn_out 64 --k_folds 3 --device cuda --num_workers 0 --group_by subject
 
-# Live inference
-python src/infer_v2.py --model sweep/models/fern_v2_latest.pth --camera_id 0 --window_size 60 --stride 10 --threshold 0.6
+# Live inference (PyTorch)
+python src/infer_v2.py --model sweep/models/fern_v2_latest.pth --camera_id 0 --window_size 60 --stride 10 --threshold 0.5
+
+# Live inference (ONNX, no PyTorch)
+python src/infer_onnx.py --onnx_path sweep/models/fern_v2.onnx --camera_id 0 --camera_view 0 --threshold 0.5
+
+# Use YAML config instead of CLI args
+python src/train_v2.py --config configs/train_config.yaml
 ```
 
 ## Experiment Results
@@ -109,10 +115,14 @@ python src/infer_v2.py --model sweep/models/fern_v2_latest.pth --camera_id 0 --w
 - **z=0**: All skeleton CSVs have z=0 (eliminates MediaPipe/YOLO depth conflict)
 - **Foot_hold gaps**: 60-frame segments inserted at every gesture-group transition
 - **Mirror pairing**: Originals and mirrors stay paired in same split (train/val/test)
-- **Confidence threshold**: 0.6 recommended for production
+- **Confidence threshold**: 0.5 recommended for production (lowered from 0.6 to reduce uncertain frames)
 - **Camera-ID encoding**: c3=[1,0], c2=[0,1] — appends 2 columns → input (T, 32)
 - **Input feature dim**: 30 base + (n_cameras if >1 else 0) = 32 for Phase 1
 - **num_workers=0 on Windows**: DataLoader multiprocessing hangs with SubsetRandomSampler. Always use `--num_workers 0`.
+- **train_all also saves best**: `--train_all` now saves the final checkpoint as both `_latest.pth` and `_best.pth` for consistent model file contract.
+- **Resume loads saved args**: Model construction during `--resume` reads cnn_out, lstm_hidden, lstm_layers, dropout, input_features from the checkpoint's args dict instead of CLI defaults.
+- **ONNX auto-reads more params**: Export now also reads `num_classes` and `dropout` from checkpoint args (not just `input_features` and `cnn_out`).
+- **Config loader available**: `config_loader.py` loads YAML configs and merges with CLI args. See `configs/train_config.yaml`.
 
 ## Resources
 - Full report: `FERN_v2_COMPLETE_REPORT.md`

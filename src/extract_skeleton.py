@@ -164,6 +164,9 @@ def extract_video(video_path: str, output_csv: str, show: bool = False):
         return 0, 0.0
 
     fps       = cap.get(cv2.CAP_PROP_FPS)
+    if fps == 0:
+        print(f"  WARNING: fps=0 for {video_path.name}, defaulting to 30")
+        fps = 30.0
     total     = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
     detected  = 0
     frame_idx = 0

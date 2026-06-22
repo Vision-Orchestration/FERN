@@ -238,18 +238,23 @@ def train(args):
     start_epoch = 0
     if args.resume:
         print(f"Resuming from {args.resume}")
-        ckpt = torch.load(args.resume, map_location=device)
+        ckpt = torch.load(args.resume, map_location=device, weights_only=True)
         start_epoch = ckpt["epoch"]
         args.epochs = max(args.epochs, start_epoch)  # ensure we don't stop early
+
+    if args.resume:
+        saved = ckpt.get("args", {})
+    else:
+        saved = {}
 
     model = FERNv2(
         num_joints=10,
         num_classes=len(DEFAULT_CLASSES),
-        cnn_out=args.cnn_out,
-        lstm_hidden=args.lstm_hidden,
-        lstm_layers=args.lstm_layers,
-        dropout=args.dropout,
-        input_features=input_features,
+        cnn_out=saved.get("cnn_out", args.cnn_out),
+        lstm_hidden=saved.get("lstm_hidden", args.lstm_hidden),
+        lstm_layers=saved.get("lstm_layers", args.lstm_layers),
+        dropout=saved.get("dropout", args.dropout),
+        input_features=saved.get("input_features", input_features),
     ).to(device)
 
     if args.resume:
@@ -259,7 +264,7 @@ def train(args):
     print(f"Model parameters: {total_params:,}")
 
     # --- Loss, optimiser, scaler ---
-    criterion = nn.CrossEntropyLoss(label_smoothing=0.1)
+    criterion = nn.CrossEntropyLoss(label_smoothing=args.label_smoothing)
     optimizer = optim.AdamW(
         model.parameters(),
         lr=args.lr,
@@ -273,6 +278,11 @@ def train(args):
         base_lr=args.lr,
     )
     stopper   = EarlyStopping(patience=args.patience)
+    early_stop_metric = args.early_stopping_metric
+
+    best_val_acc  = 0.0
+    best_ckpt     = os.path.join(args.output_dir, "fern_v2_best.pth")
+    latest_ckpt   = os.path.join(args.output_dir, "fern_v2_latest.pth")
 
     if args.resume:
         optimizer.load_state_dict(ckpt["optim_state"])
@@ -285,10 +295,6 @@ def train(args):
     log_dir = os.path.join(args.log_dir, "tensorboard")
     os.makedirs(log_dir, exist_ok=True)
     writer  = SummaryWriter(log_dir)
-
-    best_val_acc  = 0.0
-    best_ckpt     = os.path.join(args.output_dir, "fern_v2_best.pth")
-    latest_ckpt   = os.path.join(args.output_dir, "fern_v2_latest.pth")
 
     print(f"\nTraining for up to {args.epochs} epochs ...\n")
     header = f"{'Epoch':>6} {'LR':>8} {'T-Loss':>8} {'T-Acc':>7} {'V-Loss':>8} {'V-Acc':>7} {'Time':>7}"
@@ -339,7 +345,7 @@ def train(args):
         torch.save(ckpt, latest_ckpt)
 
         if args.train_all:
-            # Just save latest — no validation to track
+            torch.save(ckpt, best_ckpt)
             continue
 
         writer.add_scalar("Loss/val",    val_loss,   epoch)
@@ -353,7 +359,7 @@ def train(args):
                   f"(saved to {best_ckpt})")
 
         if epoch >= args.warmup_epochs:
-            stopper.step(val_acc)
+            stopper.step(val_loss if early_stop_metric == "loss" else val_acc)
         if stopper.should_stop:
             print(f"\nEarly stopping at epoch {epoch+1} "
                   f"(no improvement for {args.patience} epochs).")
@@ -385,11 +391,13 @@ def parse_args():
     p.add_argument("--lr",            type=float, default=3e-4)
     p.add_argument("--weight_decay",  type=float, default=1e-2)
     p.add_argument("--dropout",       type=float, default=0.5)
+    p.add_argument("--label_smoothing", type=float, default=0.1)
     p.add_argument("--cnn_out",       type=int,   default=32)
     p.add_argument("--lstm_hidden",   type=int,   default=64)
     p.add_argument("--lstm_layers",   type=int,   default=2)
-    p.add_argument("--num_workers",   type=int,   default=4)
+    p.add_argument("--num_workers",   type=int,   default=0)
     p.add_argument("--patience",      type=int,   default=15)
+    p.add_argument("--early_stopping_metric", default="loss", choices=["acc", "loss"])
     p.add_argument("--device",        default="cuda")
     p.add_argument("--seed",          type=int,   default=42)
     p.add_argument("--split_mode",    default="random", choices=["random", "subject"])

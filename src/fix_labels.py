@@ -16,6 +16,8 @@ OLD_TO_NEW = {
     "neutral": "foot_hold",
 }
 
+KEEP_NEUTRAL = False  # Set True to preserve neutral as separate class
+
 def fix_json(path):
     with open(path) as f:
         data = json.load(f)
@@ -50,6 +52,16 @@ def fix_json(path):
 
 
 if __name__ == "__main__":
+    import argparse
+    ap = argparse.ArgumentParser(description="Fix label JSON inconsistencies")
+    ap.add_argument("--keep-neutral", action="store_true",
+                    help="Preserve neutral as a separate class instead of merging into foot_hold")
+    args = ap.parse_args()
+
+    if args.keep_neutral:
+        global OLD_TO_NEW
+        OLD_TO_NEW = {k: v for k, v in OLD_TO_NEW.items() if k != "neutral"}
+
     base = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
     for label_dir in ["data/labels/merged_v1", "data/labels/grouped_by_gesture"]:

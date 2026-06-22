@@ -314,7 +314,14 @@ class SkeletonWindowDataset(Dataset):
                 continue
 
             cam_id = int(label_data.get("camera_id", 0))
+            if cam_id >= self.n_cameras:
+                print(f"  WARNING: cam_id={cam_id} >= n_cameras={self.n_cameras} in {csv_path.name}, setting to 0")
+                cam_id = 0
             T = len(skeleton)
+
+            segments = sorted(segments, key=lambda s: s["start_frame"])
+            short_count = 0
+            prev_end = -1
 
             for seg in segments:
                 gesture = seg["gesture"]
@@ -323,13 +330,29 @@ class SkeletonWindowDataset(Dataset):
                     continue
                 label = self.class_map[gesture]
                 s     = seg["start_frame"]
-                e     = min(seg["end_frame"], T - 1)
+                e     = seg["end_frame"]
 
-                # Slide windows across this segment.
+                if s >= T:
+                    print(f"  WARNING: start_frame={s} >= T={T} in {csv_path.name}, skipping segment")
+                    continue
+                if s > e:
+                    print(f"  WARNING: start_frame={s} > end_frame={e} in {csv_path.name}, skipping segment")
+                    continue
+
+                seg_len = e - s + 1
+                if seg_len < self.window_size:
+                    short_count += 1
+
+                if s <= prev_end:
+                    print(f"  WARNING: Overlapping segments in {csv_path.name}: "
+                          f"'{gesture}' starts at {s} but previous ends at {prev_end}")
+                prev_end = e
+
+                e = min(e, T - 1)
+
                 pos = s
                 while pos + self.window_size <= e + 1:
                     window = skeleton[pos: pos + self.window_size]
-                    # Skip windows where too few frames were actually detected.
                     det_ratio = detected[pos: pos + self.window_size].mean()
                     if det_ratio < 0.7:
                         skipped_windows += 1
@@ -341,6 +364,8 @@ class SkeletonWindowDataset(Dataset):
 
         if unknown_gestures:
             print(f"  WARNING: Unknown gestures ignored: {unknown_gestures}")
+        if short_count:
+            print(f"  WARNING: {short_count} segments < window_size={self.window_size}.")
         if skipped_windows:
             print(f"  INFO: Skipped {skipped_windows} high-NaN windows.")
 

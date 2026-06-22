@@ -29,16 +29,20 @@ def evaluate(args):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     # Load checkpoint.
-    ckpt  = torch.load(args.model, map_location=device, weights_only=False)
+    ckpt  = torch.load(args.model, map_location=device, weights_only=True)
     saved = ckpt.get("args", {})
+
+    n_cameras = saved.get("n_cameras", 1)
+    input_features = 30 + (n_cameras if n_cameras > 1 else 0)
 
     model = FERNv2(
         num_joints=10,
         num_classes=len(DEFAULT_CLASSES),
         cnn_out=saved.get("cnn_out", 64),
-        lstm_hidden=saved.get("lstm_hidden", 128),
-        lstm_layers=saved.get("lstm_layers", 2),
-        dropout=0.0,   # no dropout at eval time
+        lstm_hidden=saved.get("lstm_hidden", 0),
+        lstm_layers=saved.get("lstm_layers", 1),
+        dropout=0.0,
+        input_features=input_features,
     ).to(device)
     model.load_state_dict(ckpt["model_state"])
     model.eval()
@@ -53,7 +57,7 @@ def evaluate(args):
         augment=False,
     )
 
-    loader = DataLoader(ds, batch_size=64, shuffle=False, num_workers=2)
+    loader = DataLoader(ds, batch_size=64, shuffle=False, num_workers=args.num_workers)
     n      = len(DEFAULT_CLASSES)
 
     all_preds  = []
@@ -121,6 +125,7 @@ def parse_args():
     p.add_argument("--label_dir",    default="data/labels")
     p.add_argument("--window_size",  type=int, default=60)
     p.add_argument("--stride",       type=int, default=15)
+    p.add_argument("--num_workers",  type=int, default=0)
     return p.parse_args()
 
 

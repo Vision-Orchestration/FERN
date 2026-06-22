@@ -50,7 +50,8 @@ def mirror_skeleton_csv(in_path: str, out_path: str):
             if len(row) < 34:
                 continue
             # Coords start at index 2
-            coords = [float(v) if v else 0.0 for v in row[2:]]
+            coords = [float(v) if v not in ('', 'nan') else float('nan') for v in row[2:]]
+            # Negate all X coords (every 3rd starting from 0)
             # Negate all X coords (every 3rd starting from 0)
             for i in range(0, len(coords), 3):
                 coords[i] = -coords[i]
@@ -58,8 +59,8 @@ def mirror_skeleton_csv(in_path: str, out_path: str):
             for l, r in LR_SWAP_PAIRS:
                 for off in range(3):
                     coords[l + off], coords[r + off] = coords[r + off], coords[l + off]
-            # Write mirrored row
-            out_row = row[:2] + [f"{v:.12f}" for v in coords]
+            # Write mirrored row (use full precision)
+            out_row = row[:2] + [f"{v}" for v in coords]
             writer.writerow(out_row)
 
 def main():

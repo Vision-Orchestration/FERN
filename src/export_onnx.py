@@ -22,14 +22,15 @@ def export(
 ):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-    ckpt_full = torch.load(checkpoint_path, map_location=device)
+    ckpt_full = torch.load(checkpoint_path, map_location=device, weights_only=True)
     ckpt_args = ckpt_full.get("args") if isinstance(ckpt_full, dict) else None
     if ckpt_args:
         if input_features is None:
             n_cam = ckpt_args.get("n_cameras", 1)
             input_features = (num_joints * 3) + (n_cam if n_cam > 1 else 0)
         cnn_out = ckpt_args.get("cnn_out", cnn_out)
-        dropout = ckpt_args.get("dropout", 0.6)
+        dropout = ckpt_args.get("dropout", dropout if 'dropout' in dir() else 0.6)
+        num_classes = ckpt_args.get("num_classes", num_classes)
 
     model = FERNv2(
         num_joints=num_joints,

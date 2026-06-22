@@ -78,7 +78,7 @@ def frame_to_features(results):
 
 def load_model(model_path, device):
     """Load model, auto-detecting n_cameras and input_features from checkpoint."""
-    ckpt = torch.load(model_path, map_location=device, weights_only=False)
+    ckpt = torch.load(model_path, map_location=device, weights_only=True)
     saved = ckpt.get("args", {}) or {}
 
     n_cameras = int(saved.get("n_cameras", 1))
@@ -224,7 +224,7 @@ def parse_args():
                    help="One-hot index: 0=front(c3), 1=side(c2) — required for multi-camera models")
     p.add_argument("--window_size", type=int, default=60)
     p.add_argument("--stride", type=int, default=10)
-    p.add_argument("--threshold", type=float, default=0.6)
+    p.add_argument("--threshold", type=float, default=0.5)
     return p.parse_args()
 
 
