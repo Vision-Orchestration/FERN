@@ -1,49 +1,34 @@
-"""
-FERN v2 — Step 2: Label continuous gesture videos.
+# Auto-activate FERN_V2 venv if not already active
+import sys as _sys, os as _os
+_venv_python = _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), '..', 'venv', 'Scripts', 'python.exe')
+if _sys.prefix == _sys.base_prefix and _os.path.isfile(_venv_python):
+    _os.execv(_venv_python, [_venv_python] + _sys.argv)
 
-Single-pass mode: press S at gesture START, E at gesture END.
-The tool records (start_frame, end_frame, gesture_label) pairs in real time
-as you scrub through the video. No two-pass workflow.
+"""
+FERN v2 — Label continuous gesture videos (flexible single-pass mode).
 
 Controls
 --------
-S      — mark START of current gesture  (green flash)
-E      — mark END of current gesture    (red flash)
-R      — undo last mark (removes most recent S or E)
-A      — back 5 frames
-D      — forward 5 frames
-B      — back 50 frames
-F      — forward 50 frames
+1-7    — select gesture (1=foot_lift .. 7=forward_kick)
+H      — select foot_hold as current gesture
+S      — mark START of selected gesture   (green flash)
+E      — mark END of selected gesture     (red flash)
+R      — undo last mark
+Z      — delete a completed segment (cycle through with arrow keys)
+A/D    — back / forward 5 frames
+B/F    — back / forward 50 frames
 W      — save and move to next video
 Q      — quit without saving
 
-Label file format (JSON):
-{
-    "video_path": "data/raw/session01.mp4",
-    "fps": 30.0,
-    "total_frames": 1150,
-    "gesture_order": ["foot_lift", ...],
-    "reps_per_gesture": 3,
-    "segments": [
-        {"gesture": "foot_lift", "start_frame": 12, "end_frame": 78},
-        ...
-    ]
-}
-
 Usage
 -----
-python src/label_videos.py \\
-    --video_dir   data/raw \\
-    --label_dir   data/labels \\
-    --gestures    foot_lift sideway_kick cross_front heel_tap flamingo_bend forward_step forward_kick \\
-    --reps        3
+python src/label_videos_v3.py \\
+    --video_dir   "data/raw videos/front" \\
+    --label_dir   data/labels/raw_front
 
-Auto mode (fixed-timing template):
-python src/label_videos.py \\
-    --mode      auto \\
-    --video_dir data/raw \\
-    --label_dir data/labels \\
-    --template  data/labels/template.json
+python src/label_videos_v3.py \\
+    --video_dir   "data/raw videos/45 from right" \\
+    --label_dir   data/labels/raw_45
 """
 
 import argparse
@@ -53,18 +38,31 @@ from pathlib import Path
 
 import cv2
 
+# ── gesture map ───────────────────────────────────────────────────────────────
+GESTURES = [
+    'foot_lift',       # 1
+    'sideway_kick',    # 2
+    'cross_front',     # 3
+    'heel_tap',        # 4
+    'flamingo_bend',   # 5
+    'forward_step',    # 6
+    'forward_kick',    # 7
+]
+GESTURE_KEYS = {str(i + 1): g for i, g in enumerate(GESTURES)}
+
 # ── overlay constants ──────────────────────────────────────────────────────────
-COL_GREEN  = (0,   220,  50)    # start mark / idle state
-COL_RED    = (0,    50, 220)    # end mark / inside-gesture state  (BGR)
-COL_YELLOW = (0,   220, 220)    # time / frame counter
-COL_GRAY   = (160, 160, 160)    # secondary info
+COL_GREEN  = (0,   220,  50)
+COL_RED    = (0,    50, 220)
+COL_YELLOW = (0,   220, 220)
+COL_GRAY   = (160, 160, 160)
 COL_WHITE  = (230, 230, 230)
-BAR_ALPHA  = 0.45               # background strip opacity
+COL_CYAN   = (220, 220,   0)
+COL_MAGENTA = (180,  50, 180)
+BAR_ALPHA  = 0.45
 FONT       = cv2.FONT_HERSHEY_SIMPLEX
 
 
 def _put_text(frame, text, pos, color, scale=0.72, thickness=2):
-    """Draw text with a dark semi-transparent backing strip for legibility."""
     (tw, th), bl = cv2.getTextSize(text, FONT, scale, thickness)
     x, y = pos
     overlay = frame.copy()
@@ -78,7 +76,6 @@ def _put_text(frame, text, pos, color, scale=0.72, thickness=2):
 
 
 def _get_frame(cap, idx, total):
-    """Seek to idx and return a display-ready frame (max 800px tall)."""
     idx = max(0, min(idx, total - 1))
     cap.set(cv2.CAP_PROP_POS_FRAMES, idx)
     ret, frame = cap.read()
@@ -86,47 +83,66 @@ def _get_frame(cap, idx, total):
         return None
     h, w = frame.shape[:2]
     if h > 800:
-        scale  = 800 / h
-        frame  = cv2.resize(frame, (int(w * scale), int(h * scale)))
+        scale = 800 / h
+        frame = cv2.resize(frame, (int(w * scale), int(h * scale)))
     return frame
 
 
-# ── state machine ──────────────────────────────────────────────────────────────
-# We track a list of "events":  {'type': 'start'|'end', 'frame': int, 'gesture': str|None}
-# A complete segment requires a start event followed by an end event for the same rep.
-
-def _build_segments(events, sequence):
-    """
-    Pair start/end events into segments.
-    Returns list of {'gesture', 'start_frame', 'end_frame'}.
-    Incomplete pairs (start without end) are excluded.
-    """
-    starts = [e for e in events if e['type'] == 'start']
-    ends   = [e for e in events if e['type'] == 'end']
-
-    # Validate event interleaving
-    if len(starts) != len(ends):
-        print(f"  WARNING: {len(starts)} start events but {len(ends)} end events — "
-              f"pairs may be misaligned")
-    for i in range(1, len(events)):
-        if events[i]['type'] == events[i-1]['type']:
-            print(f"  WARNING: Consecutive {events[i]['type']} events at frame "
-                  f"{events[i]['frame']} — possible double-press")
-
+def _build_segments(events):
+    """Pair consecutive start/end events into segments."""
     segments = []
-    for i, s in enumerate(starts):
-        if i < len(ends):
-            e = ends[i]
-            if e['frame'] > s['frame']:
-                segments.append({
-                    'gesture':     s['gesture'],
-                    'start_frame': s['frame'],
-                    'end_frame':   e['frame'],
-                })
+    i = 0
+    while i < len(events):
+        if events[i]['type'] == 'start':
+            # find next end
+            j = i + 1
+            while j < len(events) and events[j]['type'] == 'start':
+                j += 1
+            if j < len(events) and events[j]['type'] == 'end':
+                if events[j]['frame'] > events[i]['frame']:
+                    segments.append({
+                        'gesture':     events[i]['gesture'],
+                        'start_frame': events[i]['frame'],
+                        'end_frame':   events[j]['frame'],
+                    })
+                i = j + 1
+            else:
+                i += 1
+        else:
+            i += 1
     return segments
 
 
-def label_interactive(video_path, output_json, gestures, reps):
+def _segment_summary(segments):
+    """Return a short summary string of all segments."""
+    if not segments:
+        return "  (none)"
+    lines = []
+    for i, seg in enumerate(segments):
+        g = seg['gesture']
+        s, e = seg['start_frame'], seg['end_frame']
+        lines.append(f"    {i+1:>2}. {g:<16}  f{s}-{e}  ({e-s} frames)")
+    return "\n".join(lines)
+
+
+def _gesture_color(gesture):
+    """Return a color for the current gesture label."""
+    if gesture == 'foot_hold':
+        return COL_CYAN
+    idx = GESTURES.index(gesture) if gesture in GESTURES else -1
+    colors = [
+        (0, 200, 255),   # foot_lift - orange
+        (255, 100, 0),   # sideway_kick - blue
+        (0, 255, 100),   # cross_front - green
+        (100, 255, 255), # heel_tap - light blue
+        (255, 0, 200),   # flamingo_bend - pink
+        (0, 180, 255),   # forward_step - orange-yellow
+        (255, 255, 0),   # forward_kick - cyan
+    ]
+    return colors[idx] if 0 <= idx < len(colors) else COL_WHITE
+
+
+def label_interactive(video_path, output_json):
     cap = cv2.VideoCapture(str(video_path))
     if not cap.isOpened():
         print(f"  Cannot open {video_path}")
@@ -135,20 +151,21 @@ def label_interactive(video_path, output_json, gestures, reps):
     fps   = cap.get(cv2.CAP_PROP_FPS) or 30.0
     total = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
 
-    # Build expected sequence: [g0,g0,g0, g1,g1,g1, ...]
-    sequence = [g for g in gestures for _ in range(reps)]
-    n_expected = len(sequence)   # total reps = len(gestures) * reps
-
-    events   = []   # list of {type, frame, gesture}
+    current_gesture = GESTURES[0]   # default: foot_lift (key 1)
+    events   = []                    # list of {type, frame, gesture}
     frame_idx = 0
-    flash     = None   # ('start'|'end', countdown_frames)
+    flash     = None                 # ('start'|'end', countdown)
+
+    # segment deletion state
+    delete_mode   = False
+    delete_idx    = 0
+    preview_segs  = []
 
     print(f"\n  Video   : {Path(video_path).name}")
     print(f"  FPS     : {fps:.1f}  |  Frames: {total}")
-    print(f"  Expected: {n_expected} segments  ({len(gestures)} gestures × {reps} reps)")
-    print(f"  Order   : {', '.join(gestures)}")
     print()
-    print("  S=mark start  E=mark end  R=undo  A/D=±5f  B/F=±50f  W=save  Q=quit")
+    print("  1-7=select gesture  H=foot_hold  S=start  E=end  R=undo")
+    print("  Z=delete segment  A/D=±5f  B/F=±50f  W=save  Q=quit")
     print()
 
     while True:
@@ -156,14 +173,12 @@ def label_interactive(video_path, output_json, gestures, reps):
         if frame is None:
             break
 
-        # ── counts ──
         n_starts = sum(1 for e in events if e['type'] == 'start')
         n_ends   = sum(1 for e in events if e['type'] == 'end')
-        # Next expected gesture label
-        next_gesture = sequence[n_starts] if n_starts < n_expected else None
-        inside_gesture = n_starts > n_ends   # started but not yet ended
+        segments = _build_segments(events)
+        inside_gesture = n_starts > n_ends
 
-        # ── flash overlay (brief color burst on mark) ──
+        # ── flash overlay ──
         if flash:
             ftype, fcount = flash
             color = COL_GREEN if ftype == 'start' else COL_RED
@@ -175,34 +190,97 @@ def label_interactive(video_path, output_json, gestures, reps):
 
         # ── HUD ──
         time_sec = frame_idx / fps
+        g_col = _gesture_color(current_gesture)
 
-        # Line 1: what to do next
-        if inside_gesture:
+        if delete_mode:
+            status = f"DELETE mode: segment {delete_idx+1}/{len(preview_segs)}  " \
+                     f"[ENTER]=confirm  [ESC]=cancel  [←→]=cycle"
+            s_col = COL_MAGENTA
+        elif inside_gesture:
             cur_g = events[-1]['gesture'] if events else '?'
-            status = f"INSIDE GESTURE: {cur_g}  |  press E to mark END"
-            s_col  = COL_RED
-        elif next_gesture:
-            status = f"Seg {n_starts+1}/{n_expected}: press S at START of  [{next_gesture}]"
-            s_col  = COL_GREEN
+            status = f"INSIDE: {cur_g}  |  press E to mark END"
+            s_col = COL_RED
         else:
-            status = f"All {n_expected} segments marked.  Press W to save."
-            s_col  = COL_WHITE
+            status = f"Selected: [{current_gesture.upper()}]  |  press S to mark START"
+            s_col = g_col
 
-        _put_text(frame, status,           (10,  32), s_col,   scale=0.70, thickness=2)
+        _put_text(frame, status, (10, 32), s_col, scale=0.68, thickness=2)
         _put_text(frame, f"Frame {frame_idx}  ({time_sec:.2f}s)",
-                                           (10,  64), COL_YELLOW, scale=0.62, thickness=2)
-        _put_text(frame, f"Starts: {n_starts}  Ends: {n_ends}  Complete segs: {min(n_starts, n_ends)}",
-                                           (10,  92), COL_GRAY,   scale=0.55, thickness=1)
+                                       (10, 62), COL_YELLOW, scale=0.60, thickness=2)
+        _put_text(frame, f"Segments: {len(segments)}  |  Starts: {n_starts}  Ends: {n_ends}",
+                                       (10, 88), COL_GRAY, scale=0.52, thickness=1)
 
-        if events:
-            last = events[-1]
-            last_txt = f"Last: [{last['type'].upper()}] frame {last['frame']}  {last['gesture'] or ''}"
-            _put_text(frame, last_txt,     (10, 116), COL_GRAY,   scale=0.52, thickness=1)
+        # gesture palette at bottom
+        y_pal = frame.shape[0] - 10
+        x_pal = 10
+        for i, g in enumerate(GESTURES):
+            label = f"{i+1}:{g}"
+            col = g_col if g == current_gesture else COL_GRAY
+            thk = 2 if g == current_gesture else 1
+            _put_text(frame, label, (x_pal, y_pal - (6 - i) * 22), col, scale=0.45, thickness=thk)
+        _put_text(frame, f"H:foot_hold", (x_pal, y_pal), COL_CYAN if current_gesture == 'foot_hold' else COL_GRAY,
+                  scale=0.45, thickness=2 if current_gesture == 'foot_hold' else 1)
+
+        # segment list on right side
+        if segments:
+            x_seg = frame.shape[1] - 280
+            _put_text(frame, "Segments:", (x_seg, 32), COL_WHITE, scale=0.50, thickness=1)
+            for i, seg in enumerate(segments):
+                y = 56 + i * 18
+                if y > frame.shape[0] - 20:
+                    _put_text(frame, f"  ... +{len(segments) - i} more", (x_seg, y), COL_GRAY, scale=0.42, thickness=1)
+                    break
+                g = seg['gesture']
+                col = _gesture_color(g)
+                txt = f"  {i+1:>2}. {g}"
+                _put_text(frame, txt, (x_seg, y), col, scale=0.42, thickness=1)
+
+        # delete preview overlay
+        if delete_mode and preview_segs:
+            seg = preview_segs[delete_idx]
+            h, w = frame.shape[:2]
+            overlay = frame.copy()
+            cv2.rectangle(overlay, (0, h - 60), (w, h), (0, 0, 180), cv2.FILLED)
+            cv2.addWeighted(overlay, 0.7, frame, 0.3, 0, frame)
+            _put_text(frame,
+                      f"DELETE: {seg['gesture']}  f{seg['start_frame']}-{seg['end_frame']}",
+                      (10, h - 25), COL_WHITE, scale=0.65, thickness=2)
 
         cv2.imshow("FERN v2 — Labeling", frame)
         key = cv2.waitKey(0) & 0xFF
 
         # ── key handling ──
+        if delete_mode:
+            if key == 13:  # Enter
+                # confirm delete
+                seg = preview_segs[delete_idx]
+                # remove matching events
+                new_events = []
+                skip_start = False
+                skip_end = False
+                for e in events:
+                    if (e['type'] == 'start' and e['frame'] == seg['start_frame']
+                            and e['gesture'] == seg['gesture'] and not skip_start):
+                        skip_start = True
+                        continue
+                    if (e['type'] == 'end' and e['frame'] == seg['end_frame']
+                            and e['gesture'] == seg['gesture'] and not skip_end):
+                        skip_end = True
+                        continue
+                    new_events.append(e)
+                events = new_events
+                print(f"  Deleted segment: {seg['gesture']} f{seg['start_frame']}-{seg['end_frame']}")
+                delete_mode = False
+                preview_segs = []
+            elif key == 27:  # Escape
+                delete_mode = False
+                preview_segs = []
+            elif key == ord('d') or key == ord('D') or key == 83:  # right arrow
+                delete_idx = (delete_idx + 1) % len(preview_segs)
+            elif key == ord('a') or key == ord('A') or key == 81:  # left arrow
+                delete_idx = (delete_idx - 1) % len(preview_segs)
+            continue
+
         if key == ord('q') or key == ord('Q'):
             cap.release()
             cv2.destroyAllWindows()
@@ -211,16 +289,25 @@ def label_interactive(video_path, output_json, gestures, reps):
         elif key == ord('w') or key == ord('W'):
             break
 
+        # gesture selection
+        elif chr(key) in GESTURE_KEYS:
+            if not inside_gesture:
+                current_gesture = GESTURE_KEYS[chr(key)]
+                print(f"  Selected: {current_gesture}")
+
+        elif key == ord('h') or key == ord('H'):
+            if not inside_gesture:
+                current_gesture = 'foot_hold'
+                print(f"  Selected: foot_hold")
+
+        # start / end marks
         elif key == ord('s') or key == ord('S'):
             if inside_gesture:
                 print("  Already inside a gesture — press E to end it first.")
-            elif n_starts < n_expected:
-                g = sequence[n_starts]
-                events.append({'type': 'start', 'frame': frame_idx, 'gesture': g})
-                flash = ('start', 4)
-                print(f"  START  frame {frame_idx} ({time_sec:.2f}s)  [{g}]")
             else:
-                print("  All starts recorded.")
+                events.append({'type': 'start', 'frame': frame_idx, 'gesture': current_gesture})
+                flash = ('start', 4)
+                print(f"  START  frame {frame_idx} ({time_sec:.2f}s)  [{current_gesture}]")
 
         elif key == ord('e') or key == ord('E'):
             if not inside_gesture:
@@ -238,35 +325,41 @@ def label_interactive(video_path, output_json, gestures, reps):
                 removed = events.pop()
                 print(f"  Undone: [{removed['type'].upper()}] frame {removed['frame']} [{removed['gesture']}]")
 
+        # delete mode
+        elif key == ord('z') or key == ord('Z'):
+            segments = _build_segments(events)
+            if segments:
+                delete_mode = True
+                preview_segs = segments
+                delete_idx = len(segments) - 1  # start at last
+            else:
+                print("  No segments to delete.")
+
+        # navigation
         elif key == ord('a') or key == ord('A'):
             frame_idx = max(0, frame_idx - 5)
-
         elif key == ord('d') or key == ord('D'):
             frame_idx = min(total - 1, frame_idx + 5)
-
         elif key == ord('b') or key == ord('B'):
             frame_idx = max(0, frame_idx - 50)
-
         elif key == ord('f') or key == ord('F'):
             frame_idx = min(total - 1, frame_idx + 50)
 
     cap.release()
     cv2.destroyAllWindows()
 
-    # ── build segments and save ──
-    segments = _build_segments(events, sequence)
+    # ── build and save ──
+    segments = _build_segments(events)
 
     if not segments:
-        print("  No complete segments to save.")
+        print("  No segments to save.")
         return False
 
     label_data = {
-        'video_path':       str(video_path),
-        'fps':              fps,
-        'total_frames':     total,
-        'gesture_order':    gestures,
-        'reps_per_gesture': reps,
-        'segments':         segments,
+        'video_path':   str(video_path),
+        'fps':          fps,
+        'total_frames': total,
+        'segments':     segments,
     }
 
     os.makedirs(os.path.dirname(output_json), exist_ok=True)
@@ -274,29 +367,7 @@ def label_interactive(video_path, output_json, gestures, reps):
         json.dump(label_data, f, indent=2)
 
     print(f"\n  Saved {len(segments)} segments → {output_json}")
-    if len(segments) < n_expected:
-        print(f"  WARNING: {n_expected - len(segments)} incomplete segment(s) skipped.")
-    return True
-
-
-# ── auto mode ──────────────────────────────────────────────────────────────────
-
-def label_auto(video_path, output_json, template):
-    cap   = cv2.VideoCapture(str(video_path))
-    fps   = cap.get(cv2.CAP_PROP_FPS) or 30.0
-    total = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
-    cap.release()
-
-    data = dict(template)
-    data['video_path']   = str(video_path)
-    data['fps']          = fps
-    data['total_frames'] = total
-
-    os.makedirs(os.path.dirname(output_json), exist_ok=True)
-    with open(output_json, 'w') as f:
-        json.dump(data, f, indent=2)
-
-    print(f"  Auto-labeled: {Path(video_path).name}")
+    print(_segment_summary(segments))
     return True
 
 
@@ -304,27 +375,12 @@ def label_auto(video_path, output_json, template):
 
 SUPPORTED = {'.mp4', '.mov', '.avi', '.mkv', '.wmv'}
 
-DEFAULT_GESTURES = [
-    'foot_lift',
-    'sideway_kick',
-    'cross_front',
-    'heel_tap',
-    'flamingo_bend',
-    'forward_step',
-    'forward_kick',
-]
-
 
 def main():
     p = argparse.ArgumentParser(
         description='Label continuous gesture videos for FERN v2.')
-    p.add_argument('--mode',      choices=['interactive', 'auto'],
-                   default='interactive')
     p.add_argument('--video_dir', required=True)
     p.add_argument('--label_dir', required=True)
-    p.add_argument('--gestures',  nargs='+', default=DEFAULT_GESTURES)
-    p.add_argument('--reps',      type=int,  default=3)
-    p.add_argument('--template',  default=None)
     args = p.parse_args()
 
     videos = []
@@ -337,25 +393,13 @@ def main():
         print(f'No videos found in {args.video_dir}')
         return
 
-    print(f'Found {len(videos)} video(s).  Mode: {args.mode}')
-
-    template = None
-    if args.mode == 'auto':
-        if not args.template:
-            print('ERROR: --template required for auto mode.')
-            return
-        with open(args.template) as f:
-            template = json.load(f)
+    print(f'Found {len(videos)} video(s).  Mode: interactive')
 
     for vpath in videos:
         rel       = os.path.relpath(vpath, args.video_dir)
         json_path = os.path.join(args.label_dir,
                                  str(Path(rel).with_suffix('.json')))
-
-        if args.mode == 'interactive':
-            label_interactive(vpath, json_path, args.gestures, args.reps)
-        else:
-            label_auto(vpath, json_path, template)
+        label_interactive(vpath, json_path)
 
     print('\nDone.')
 

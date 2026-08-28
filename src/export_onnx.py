@@ -22,7 +22,7 @@ def export(
 ):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-    ckpt_full = torch.load(checkpoint_path, map_location=device, weights_only=True)
+    ckpt_full = torch.load(checkpoint_path, map_location=device, weights_only=False)
     ckpt_args = ckpt_full.get("args") if isinstance(ckpt_full, dict) else None
     if ckpt_args:
         if input_features is None:

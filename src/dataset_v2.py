@@ -199,7 +199,7 @@ class SkeletonWindowDataset(Dataset):
                     str(Path(rel).with_suffix(".json"))
                 )
                 if os.path.exists(json_path):
-                    pairs.append((csv_path, json_path))
+                    pairs.append((Path(csv_path), Path(json_path)))
         return pairs
 
     def _split_pairs(self, pairs, seed, val_ratio, test_ratio):
