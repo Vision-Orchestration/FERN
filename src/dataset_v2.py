@@ -402,22 +402,20 @@ class SkeletonWindowDataset(Dataset):
                                         np.interp(src_idx, np.arange(T), x[:, f]))
         x = x_warped
 
-        # --- Speed variation (resample 80-120% of frames) ---
+        # --- Speed variation (resample 80-120% of frames, then pad/crop back to T) ---
         if np.random.random() < 0.4:
             speed_factor = np.random.uniform(0.8, 1.2)
             new_T = max(2, int(T * speed_factor))
-            src = np.linspace(0, T - 1, new_T)
-            x_speed = np.zeros((new_T, F), dtype=x.dtype)
+            src_idx = np.linspace(0, T - 1, new_T)
+            x_resampled = np.zeros((new_T, F), dtype=x.dtype)
             for f in range(F):
-                x_speed[:, f] = np.interp(
-                    np.linspace(0, new_T - 1, T), src,
-                    np.interp(src, np.arange(T), x[:, f]))
+                x_resampled[:, f] = np.interp(src_idx, np.arange(T), x[:, f])
             # Pad or crop back to T
             if new_T > T:
-                x = x_speed[:T]
+                x = x_resampled[:T]
             else:
                 pad = np.zeros((T - new_T, F), dtype=x.dtype)
-                x = np.concatenate([x_speed, pad], axis=0)
+                x = np.concatenate([x_resampled, pad], axis=0)
 
         # --- Frame dropout (drop 5-10% of frames, replace with zero) ---
         if np.random.random() < 0.3:
