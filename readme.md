@@ -85,19 +85,20 @@ Softmax  ──→  8-class label + confidence
 
 | Metric | Value |
 |--------|-------|
-| ONNX test accuracy (sweep optimal) | **86.29%** |
-| 3-fold CV (subject-independent) | **44.36%** ± 6.75% |
-| Model parameters (optimal) | ~526K |
+| **Held-out test accuracy (6 unseen subjects)** | **68.14%** |
+| Train-all accuracy (44 subjects) | 94.44% |
+| 5-fold CV (subject-level) | 74.23% ± 16.96% |
+| Model parameters | ~526K |
 | Architecture | CNN-only |
 | Training device | RTX 3070 Laptop (8 GB) / Ryzen 7 5800H |
-| Primary camera | c3 (front, 0°) |
-| Detection filter | ≥70% detection ratio |
 
-> **The gap between CV (44.36%) and train-all ONNX (86.29%) confirms data scarcity is the primary bottleneck — the model memorizes well but doesn't generalize across subjects. Target: 20+ subjects.**
+> **The 26 pp gap between train-all (94.44%) and held-out test (68.14%) confirms data scarcity is the primary bottleneck — the model memorizes well but doesn't generalize across subjects.**
 
-**Known weak classes:**
-- `heel_tap` — inherently weak from front view; side camera recommended
-- `foot_hold` — weak when only recorded as transition padding
+**Per-class performance (held-out test):**
+- Strong: cross_front (89.8 F1), sideway_kick (84.2 F1), forward_step (78.9 F1)
+- Weak: foot_hold (3.4 F1 — collapses on unseen subjects), heel_tap (63.4 F1)
+
+**Augmentation result (negative finding):** Synthetic augmentation (rotation, spatial, interpolation) does NOT improve cross-subject generalization. CV drops from 74.23% to 68.96% with augmentation. See `PAPER_MATERIALS.md` for full analysis.
 
 ---
 
@@ -187,11 +188,13 @@ python src\test_onnx.py --onnx_path sweep\models\fern_v2.onnx --skeleton_dir dat
 
 | Tool | Command | Effect |
 |------|---------|--------|
-| **LR Mirror** | `python src\mirror_dataset.py ...` | Doubles dataset via X-flip |
-| **V1 Merge** | `python src\merge_v1_database.py ...` | Imports FERN v1 clip database |
-| **Add Foot-Hold Gaps** | `python src\add_foot_hold_gaps.py ...` | Inserts 60-frame idle gaps at gesture transitions |
+| **Mirror** | `python src/mirror_10joint.py` | X-flip mirror (active) |
+| **Rotation** | `python src/augment_rotate.py --input_dir ... --angles 5 10 15 --mirror` | ±5°/10°/15° Y-axis rotation |
+| **Spatial** | `python src/augment_spatial.py --input_dir ... --variants 2 --mirror` | Scale, shift, joint noise |
+| **Interpolation** | `python src/augment_interpolate.py --input_dir ... --factor 2` | Temporal 2× interpolation |
+| **Add Gaps** | `python src/add_foot_hold_gaps.py` | Insert 60-frame idle gaps |
 
-> Subject-aware splits required — mirrored pairs must stay in the same train/val/test fold.
+> **Finding:** Augmentation does NOT improve cross-subject generalization (68.96% vs 74.23% CV). Synthetic variants teach the model to recognize existing people better, not new people.
 
 ---
 
@@ -229,11 +232,13 @@ DroidCam phones  ──RTSP──►  MediaMTX  ──RTSP──►  Python (Ope
 
 ## Production Models
 
-| Model | Path | Params | Front Acc |
-|-------|------|:------:|:---------:|
-| Old front-only | `final/models/fern_v2.onnx` | 132K | 62.58% |
-| **Sweep optimal** | **`sweep/models/fern_v2.onnx`** | **526K** | **86.29%** |
-| Phase 1 (camera-flag) | `final_v2/models/fern_v2.onnx` | 140K | 50.48% |
+| Model | Path | Params | Train-All | Held-Out Test |
+|-------|------|:------:|:---------:|:-------------:|
+| Old front-only | `final/models/fern_v2.onnx` | 132K | 62.58% | — |
+| **Sweep optimal** | **`sweep/models/fern_v2.onnx`** | **526K** | **86.29%** | — |
+| Phase 1 (camera-flag) | `final_v2/models/fern_v2.onnx` | 140K | 50.48% | — |
+| **Original (44 subj)** | **`results_orig/fern_v2_latest.pth`** | **526K** | **94.44%** | **68.14%** |
+| Augmented (38 subj) | `results_aug/fern_v2_latest.pth` | 526K | 94.53% | 66.37% |
 
 ---
 
@@ -289,31 +294,49 @@ Record with `recording_assistant.py` (from the DroidGrid repo), run skeleton ext
 FERN/
 ├── src/
 │   ├── model_v2.py              # CNN-only architecture
-│   ├── dataset_v2.py            # Sliding-window dataset with camera-flag
+│   ├── dataset_v2.py            # Sliding-window dataset with 7 on-the-fly augmentations
 │   ├── train_v2.py              # Training loop (cosine LR + warmup + early stopping)
-│   ├── evaluate_v2.py           # Per-class metrics + confusion matrix
-│   ├── kfold_cv.py              # K-fold CV with grouped folds
+│   ├── eval_full.py             # Full-dataset evaluation + confusion matrix
+│   ├── learning_curve.py        # Accuracy vs # training subjects
+│   ├── tsne_viz.py              # t-SNE visualization of CNN embeddings
+│   ├── generate_report.py       # PDF paper report generator
+│   ├── kfold_cv.py              # 5-fold CV with subject-level grouping
 │   ├── extract_skeleton.py      # MediaPipe skeleton extraction
 │   ├── infer_v2.py              # Live inference (PyTorch)
 │   ├── infer_onnx.py            # Live inference (ONNX Runtime)
 │   ├── export_onnx.py           # .pth → .onnx export
 │   ├── test_onnx.py             # Full-dataset ONNX accuracy
-│   ├── recording_assistant.py   # Recording UI (from DroidGrid)
+│   ├── augment_rotate.py        # Rotation augmentation
+│   ├── augment_spatial.py       # Spatial augmentation
+│   ├── augment_interpolate.py   # Temporal interpolation
+│   ├── mirror_10joint.py        # X-flip mirror (active)
 │   ├── add_foot_hold_gaps.py    # Insert idle gaps at transitions
-│   ├── mirror_dataset.py        # LR skeleton augmentation
-│   └── merge_v1_database.py     # FERN v1 clip merger
-├── final/                       # Old front-only models/ (132K, 62.58%)
-├── final_v2/                    # Phase 1 camera-flag models/ (140K, 50.48%)
-├── sweep/                       # Sweep optimal models/ (526K, 86.29%)
-├── assets/
-│   └── banner.svg
-├── AGENTS.md                    # AI agent knowledge
-├── CAMERA_FLAG_AGENT.md         # Camera-flag implementation plan
-├── FERN_v2_COMPLETE_REPORT.md   # Full technical report
-├── FERN_v2_AI_REPORT.md         # AI session report
-├── run_nightly.ps1              # Nightly training pipeline
+│   └── config_loader.py         # YAML config loader
+├── configs/
+│   └── train_config.yaml        # Training hyperparameters YAML
+├── data/
+│   ├── skeletons/
+│   │   ├── front/               # 88 CSVs (44 subjects × 2 mirror)
+│   │   ├── front_aug/           # 418 augmented CSVs
+│   │   ├── front_test/          # 12 held-out CSVs (6 subjects)
+│   │   └── front_aug_test/      # 66 held-out augmented CSVs
+│   └── labels/                  # Matching JSON label files
+├── results_orig/                # Original model results
+│   ├── fern_v2_latest.pth       # Trained model
+│   ├── learning_curve/          # Learning curve JSON
+│   └── tsne.png                 # t-SNE visualization
+├── results_aug/                 # Augmented model results
+│   ├── fern_v2_latest.pth
+│   └── tsne.png
+├── final/                       # Old front-only models (132K, 62.58%)
+├── final_v2/                    # Phase 1 camera-flag models (140K, 50.48%)
+├── sweep/                       # Sweep optimal models (526K, 86.29%)
+├── FERN_V2_Paper_Report.pdf     # 11-page PDF report with all figures
+├── PAPER_MATERIALS.md           # Ablation table, dataset paragraph, all metrics
+├── AUGMENTATION_LOG.md          # Augmentation scripts and results
+├── AGENTS.md                    # AI agent knowledge base
 ├── requirements_v2.txt
-├── .gitignore
+├── LICENSE
 └── README.md
 ```
 
@@ -342,18 +365,26 @@ FERN/
 - [x] Multi-camera setup (c3, c4, c2)
 - [x] Camera-ID one-hot flag design
 - [x] Hyperparameter sweep (9 configs, optimal found)
-- [ ] 20-subject dataset recording
-- [ ] LR mirror augmentation
-- [ ] Subject-independent 5-fold CV as primary metric
+- [x] 44-subject dataset recording
+- [x] Mirror augmentation
+- [x] 5-fold subject-level CV as primary metric
+- [x] Held-out test set (6 subjects frozen)
+- [x] Augmentation experiments (rotation, spatial, interpolation)
+- [x] Learning curve analysis
+- [x] t-SNE visualization
+- [x] Paper readiness report (PDF)
 
 ### Beta
 - [ ] Camera-flag model on multi-angle data
 - [ ] Stereo triangulation (requires calibration)
 - [ ] Confidence smoothing (temporal majority vote)
+- [ ] Test-time augmentation (TTA)
+- [ ] Class-weighted loss for imbalanced classes
 
 ### Gold
-- [ ] Full augmentation suite
-- [ ] Ablation study
+- [ ] Leave-one-subject-out (LOSO) CV
+- [ ] More real subjects (target: 60+)
+- [ ] Cross-environment recordings
 - [ ] Paper draft
 
 ### Release
