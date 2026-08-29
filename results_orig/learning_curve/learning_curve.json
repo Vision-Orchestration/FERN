@@ -1,0 +1,22 @@
+[
+  {
+    "n_subjects": 5,
+    "accuracy": 80.97345132743364
+  },
+  {
+    "n_subjects": 10,
+    "accuracy": 84.51327433628319
+  },
+  {
+    "n_subjects": 20,
+    "accuracy": 81.85840707964603
+  },
+  {
+    "n_subjects": 30,
+    "accuracy": 87.16814159292035
+  },
+  {
+    "n_subjects": 38,
+    "accuracy": 89.38053097345133
+  }
+]

@@ -35,15 +35,14 @@ def extract_embeddings(args):
     model.load_state_dict(ckpt["model_state"])
     model.eval()
 
-    # Hook to capture CNN embeddings (before classifier head)
-    embeddings = []
+    window_embeddings = []
     labels = []
 
     def hook_fn(module, input, output):
-        embeddings.append(output.detach().cpu().numpy())
+        # output: (B*T, cnn_out) — store raw, we'll pool later
+        window_embeddings.append(output.detach().cpu().numpy())
 
-    # Register on the global pooling layer (after CNN)
-    hook = model.gap.register_forward_hook(hook_fn)
+    hook = model.spatial_cnn.register_forward_hook(hook_fn)
 
     ds = SkeletonWindowDataset(
         skeleton_dir=args.skeleton_dir, label_dir=args.label_dir,
@@ -60,7 +59,12 @@ def extract_embeddings(args):
 
     hook.remove()
 
-    all_emb = np.concatenate(embeddings, axis=0)
+    # Pool: (B*T, cnn_out) -> mean over T per window -> (num_windows, cnn_out)
+    all_raw = np.concatenate(window_embeddings, axis=0)
+    # We need to figure out T from the model input — use window_size
+    T = args.window_size
+    n_windows = len(all_raw) // T
+    all_emb = all_raw.reshape(n_windows, T, -1).mean(axis=1)
     all_labels = np.array(labels)
     print(f"Extracted {len(all_emb)} embeddings, shape={all_emb.shape}")
 

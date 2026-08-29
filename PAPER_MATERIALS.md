@@ -86,6 +86,27 @@
 
 ---
 
+## Learning Curve (Held-Out Test Accuracy vs # Training Subjects)
+
+| Subjects | Original | Augmented |
+|:--------:|:--------:|:---------:|
+| 5 | 80.97% | 80.65% |
+| 10 | 84.51% | 83.10% |
+| 20 | 81.86% | 83.27% |
+| 30 | 87.17% | 85.06% |
+| 38 | 89.38% | — |
+
+**Takeaway**: Accuracy increases with more subjects (80.97% → 89.38%), confirming data scarcity is the bottleneck. Augmentation does not help — curves are nearly identical, and original slightly outperforms augmented at 30 subjects.
+
+---
+
+## t-SNE Visualizations
+
+- `results_orig/tsne.png` — CNN embeddings colored by class (original model, 7068 windows)
+- `results_aug/tsne.png` — CNN embeddings colored by class (augmented model, 44995 windows)
+
+---
+
 ## Held-Out Test Set
 
 Frozen before any tuning:

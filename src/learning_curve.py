@@ -82,7 +82,7 @@ def run(args):
     print(f"Test windows: {len(test_idx)}")
 
     # Learning curve
-    subject_counts = [5, 10, 15, 20, 25, 30, 38]
+    subject_counts = [5, 10, 20, 30, 38]
     results = []
 
     for n_subj in subject_counts:
@@ -104,16 +104,16 @@ def run(args):
         optimizer = optim.AdamW(model.parameters(), lr=3e-4, weight_decay=1e-2)
 
         best_acc = 0
-        patience = 30
+        patience = 15
         no_improve = 0
-        warmup = 15
+        warmup = 10
 
-        for epoch in range(100):
+        for epoch in range(50):
             lr = 3e-4 if epoch >= warmup else 3e-4 * (epoch + 1) / warmup
             for pg in optimizer.param_groups:
                 pg["lr"] = lr
             train_one_epoch(model, train_loader, criterion, optimizer, device)
-            if (epoch + 1) % 10 == 0:
+            if (epoch + 1) % 5 == 0:
                 acc = evaluate(model, test_loader, device)
                 print(f"  E{epoch+1:>3}  test_acc={acc*100:.1f}%")
                 if acc > best_acc:
