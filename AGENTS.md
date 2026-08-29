@@ -2,16 +2,21 @@
 
 ## Project Structure
 - `src/model_v2.py` — CNN-only (lstm_hidden=0) or BiLSTM model; supports `input_features` param
-- `src/dataset_v2.py` — Sliding window dataset; supports `n_cameras` for one-hot camera-ID flag
+- `src/dataset_v2.py` — Sliding window dataset; supports `n_cameras` for one-hot camera-ID flag; 7 on-the-fly augmentations
 - `src/train_v2.py` — Training loop, AdamW, cosine LR, warmup, early stopping, `--n_cameras` and `--resume` args
 - `src/infer_v2.py` — Live camera inference with MediaPipe
 - `src/export_onnx.py` — Export `.pth` → `.onnx` + numerical validation; auto-reads `input_features` from checkpoint
 - `src/test_onnx.py` — Full-dataset accuracy + confusion matrix via ONNX Runtime; supports `--n_cameras`
 - `src/kfold_cv.py` — 5-fold CV (partially executed)
+- `src/augment_rotate.py` — Rotation augmentation (±5°, ±10°, ±15°) with optional mirrors
+- `src/augment_spatial.py` — Spatial augmentation (scaling, vertical shift, joint perturbation)
+- `src/augment_interpolate.py` — Temporal interpolation for smooth gestures
 - `src/add_foot_hold_gaps.py` — Insert 60-frame foot_hold gaps at gesture transitions
 - `src/mirror_10joint.py` — X-flip mirror augmentation
-- `data/skeletons/front/` — 76 CSVs (38 orig + 38 mirror), z=0, front camera only
-- `data/labels/front/` — 76 JSONs with foot_hold gaps inserted, camera_id=0
+- `data/skeletons/front/` — 88 CSVs (44 orig + 44 mirror), z=0, front camera only
+- `data/labels/front/` — 88 JSONs, camera_id=0
+- `data/skeletons/front_aug/` — 484 augmented CSVs (rotation + spatial + interpolation)
+- `data/labels/front_aug/` — 484 augmented JSONs
 - `data/skeletons/front_plus_45/` — 98 CSVs (76 front + 22 c2), z=0, camera_id in JSONs
 - `data/labels/front_plus_45/` — 98 JSONs (c3=0, c2=1)
 - `data/skeletons/merged_v1/` — All raw extracted skeletons including c4 files

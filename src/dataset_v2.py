@@ -378,12 +378,16 @@ class SkeletonWindowDataset(Dataset):
 
     def _augment(self, x: np.ndarray) -> np.ndarray:
         """
-        Apply moderate random perturbations at training time.
+        Apply random perturbations at training time.
 
         Transforms:
           1. Time warp (±10%)
-          2. Joint noise (σ=0.005)
-          3. Joint dropout: randomly zero out 1 joint
+          2. Speed variation (resample 80-120% of frames)
+          3. Frame dropout (drop 5-10% of frames)
+          4. Temporal shift (crop/pad 5-10 frames from edges)
+          5. Joint dropout: randomly zero out 1 joint
+          6. Joint noise (σ=0.005)
+          7. Random scaling (0.9-1.1)
         """
         T, F = x.shape
 
@@ -398,6 +402,41 @@ class SkeletonWindowDataset(Dataset):
                                         np.interp(src_idx, np.arange(T), x[:, f]))
         x = x_warped
 
+        # --- Speed variation (resample 80-120% of frames) ---
+        if np.random.random() < 0.4:
+            speed_factor = np.random.uniform(0.8, 1.2)
+            new_T = max(2, int(T * speed_factor))
+            src = np.linspace(0, T - 1, new_T)
+            x_speed = np.zeros((new_T, F), dtype=x.dtype)
+            for f in range(F):
+                x_speed[:, f] = np.interp(
+                    np.linspace(0, new_T - 1, T), src,
+                    np.interp(src, np.arange(T), x[:, f]))
+            # Pad or crop back to T
+            if new_T > T:
+                x = x_speed[:T]
+            else:
+                pad = np.zeros((T - new_T, F), dtype=x.dtype)
+                x = np.concatenate([x_speed, pad], axis=0)
+
+        # --- Frame dropout (drop 5-10% of frames, replace with zero) ---
+        if np.random.random() < 0.3:
+            n_drop = int(T * np.random.uniform(0.05, 0.10))
+            drop_idx = np.random.choice(T, size=n_drop, replace=False)
+            x[drop_idx] = 0.0
+
+        # --- Temporal shift (crop/pad 5-10 frames from edges) ---
+        if np.random.random() < 0.3:
+            shift = np.random.randint(5, 11)
+            if np.random.random() < 0.5:
+                # crop from start, pad end
+                x = np.concatenate([x[shift:],
+                                    np.zeros((shift, F), dtype=x.dtype)], axis=0)
+            else:
+                # crop from end, pad start
+                x = np.concatenate([np.zeros((shift, F), dtype=x.dtype),
+                                    x[:T - shift]], axis=0)
+
         # --- Joint dropout: zero out 1 random joint's 3 coords ---
         if np.random.random() < 0.2:
             joint = np.random.randint(0, 10)
@@ -406,6 +445,11 @@ class SkeletonWindowDataset(Dataset):
         # --- Joint noise (σ=0.005) ---
         noise = np.random.normal(0, 0.005, size=x.shape).astype(np.float32)
         x = x + noise
+
+        # --- Random scaling (0.9-1.1) ---
+        if np.random.random() < 0.3:
+            scale = np.random.uniform(0.9, 1.1)
+            x = x * scale
 
         return x
 
